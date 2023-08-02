@@ -1,5 +1,7 @@
 package com.lordmau5.wirelessutils.data;
 
+import com.lordmau5.wirelessutils.init.ModBlocks;
+import com.lordmau5.wirelessutils.init.ModItems;
 import com.lordmau5.wirelessutils.lib.ModInfo;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.item.Item;
@@ -19,8 +21,18 @@ public class GeneratorItemModels extends ItemModelProvider
     @Override
     protected void registerModels()
     {
-        //eg:
-//        singleTexture(getPath(ShrinkItems.SHRINKING_DEVICE.get()), mcLoc("item/handheld"), "layer0", modLoc("item/" + getPath(ShrinkItems.SHRINKING_DEVICE.get())));
+        registerBlockModel(ModBlocks.DIRECTIONAL_CHARGER.get());
+        registerSimpleItem(ModItems.ITEM_ENDER_COIL.get());
+        registerSimpleItem(ModItems.ITEM_GLASSES.get());
+        registerSimpleItem(ModItems.ITEM_FLUXED_PEARL.get());
+        registerSimpleItem(ModItems.ITEM_CHARGED_PEARL.get());
+        registerSimpleItem(ModItems.ITEM_QUENCHED_PEARL.get());
+//        registerSimpleItem(ModItems.ITEM_STABILIZED_PEARL.get());
+    }
+
+    public void registerSimpleItem(Item item)
+    {
+        singleTexture(getPath(item), mcLoc("item/generated"), "layer0", modLoc("item/" + getPath(item)));
     }
 
     public String getPath(Item item)

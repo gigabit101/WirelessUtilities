@@ -1,0 +1,6 @@
+{
+	"parent": "wirelessutils:block/machine_base",
+	"textures": {
+		"north": "wirelessutils:block/condenser_front"
+	}
+}
