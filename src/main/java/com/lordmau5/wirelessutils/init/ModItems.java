@@ -31,6 +31,8 @@ public class ModItems
 
     //Blocks
     public static final RegistryObject<Item> ANGLED_SLIME = ITEMS.register("angled_slime", () -> new BlockItem(ModBlocks.ANGLED_SLIME.get(), new Item.Properties()));
+    public static final RegistryObject<Item> CHUNK_CHARGER = ITEMS.register("chunk_charger", () -> new BlockItem(ModBlocks.CHUNK_CHARGER.get(), new Item.Properties()));
     public static final RegistryObject<Item> DIRECTIONAL_CHARGER = ITEMS.register("directional_charger", () -> new BlockItem(ModBlocks.DIRECTIONAL_CHARGER.get(), new Item.Properties()));
+    public static final RegistryObject<Item> POSITIONAL_CHARGER = ITEMS.register("positional_charger", () -> new BlockItem(ModBlocks.POSITIONAL_CHARGER.get(), new Item.Properties()));
 
 }

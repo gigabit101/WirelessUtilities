@@ -9,8 +9,8 @@ public class BlockAngledSlime extends BlockMachineBase
 
     private static final VoxelShape BOUNDING_BOX = Block.box(0.0625, 0.0625, 0.0625, 0.9375, 0.9375, 0.9375);
 
-    public BlockAngledSlime()
+    public BlockAngledSlime(Properties properties)
     {
-        super(Properties.of());
+        super(properties);
     }
 }

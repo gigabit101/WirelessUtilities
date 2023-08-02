@@ -1,7 +1,9 @@
-// 1.20.1	2023-08-02T21:32:03.0129972	Item Models: wirelessutils
+// 1.20.1	2023-08-02T21:47:43.4087021	Item Models: wirelessutils
 2ee76df9544d51e205f53c072ed77cbc30b9c14f assets/wirelessutils/models/item/charged_pearl.json
+700d4e14da1993872d7fcfaa4496e0499f893017 assets/wirelessutils/models/item/chunk_charger.json
 449813d71b04736f14b5c0b3dbe8a633baa255cf assets/wirelessutils/models/item/directional_charger.json
 dd88a8bbf8d16502480f00523b98d8dc29cddb6d assets/wirelessutils/models/item/ender_coil.json
 c10d23cd59a2f53f331484d06434facb9b3b4fd2 assets/wirelessutils/models/item/fluxed_pearl.json
 98eb67264fad52d03952d6c7123b4cd41c5f415e assets/wirelessutils/models/item/glasses.json
+58c71cf495e6eed1b61e0bcc099f9ccb39b50140 assets/wirelessutils/models/item/positional_charger.json
 2086d7fe84e284cc7fc8f3ab3b66f1444ce94be1 assets/wirelessutils/models/item/quenched_pearl.json

@@ -21,13 +21,17 @@ public class GeneratorItemModels extends ItemModelProvider
     @Override
     protected void registerModels()
     {
-        registerBlockModel(ModBlocks.DIRECTIONAL_CHARGER.get());
         registerSimpleItem(ModItems.ITEM_ENDER_COIL.get());
         registerSimpleItem(ModItems.ITEM_GLASSES.get());
         registerSimpleItem(ModItems.ITEM_FLUXED_PEARL.get());
         registerSimpleItem(ModItems.ITEM_CHARGED_PEARL.get());
         registerSimpleItem(ModItems.ITEM_QUENCHED_PEARL.get());
 //        registerSimpleItem(ModItems.ITEM_STABILIZED_PEARL.get());
+
+
+        registerBlockModel(ModBlocks.CHUNK_CHARGER.get());
+        registerBlockModel(ModBlocks.DIRECTIONAL_CHARGER.get());
+        registerBlockModel(ModBlocks.POSITIONAL_CHARGER.get());
     }
 
     public void registerSimpleItem(Item item)
