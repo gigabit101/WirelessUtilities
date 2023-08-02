@@ -17,5 +17,7 @@ public class GeneratorLanguage extends LanguageProvider
     {
         add("itemGroup.wirelessutils", "Wireless Utilities");
         add(ModItems.ITEM_VOID_PEARL.get(), "Void Pearl");
+        add(ModItems.ITEM_ENDER_COIL.get(), "Ender Coil");
+        add(ModItems.ITEM_GLASSES.get(), "Work Glasses");
     }
 }
