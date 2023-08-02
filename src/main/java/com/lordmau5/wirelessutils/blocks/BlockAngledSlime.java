@@ -4,8 +4,11 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -13,7 +16,10 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.NotNull;
 
 public class BlockAngledSlime extends BlockMachineBase
 {
@@ -37,8 +43,9 @@ public class BlockAngledSlime extends BlockMachineBase
     }
 
     //Debug code
+    @SuppressWarnings("deprecation")
     @Override
-    public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player p_60506_, InteractionHand p_60507_, BlockHitResult p_60508_)
+    public @NotNull InteractionResult use(BlockState blockState, @NotNull Level level, @NotNull BlockPos blockPos, @NotNull Player player, @NotNull InteractionHand interactionHand, @NotNull BlockHitResult blockHitResult)
     {
         int rot = blockState.getValue(ROTATION);
         int newRot = rot + 1;
@@ -47,5 +54,16 @@ public class BlockAngledSlime extends BlockMachineBase
         }
         level.setBlockAndUpdate(blockPos, blockState.setValue(ROTATION, newRot));
         return InteractionResult.SUCCESS;
+    }
+
+    @Override
+    public void updateEntityAfterFallOn(BlockGetter blockGetter, Entity entity)
+    {
+//        super.updateEntityAfterFallOn(blockGetter, entity);
+        Vec3 vec3 = entity.getDeltaMovement();
+        if (vec3.y < 0.0D) {
+            double d0 = 1.0D;
+            entity.setDeltaMovement(0, d0, 0);
+        }
     }
 }
