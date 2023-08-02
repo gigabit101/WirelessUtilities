@@ -32,21 +32,27 @@ public class GeneratorItemModels extends ItemModelProvider
         registerBlockModel(ModBlocks.CHUNK_CHARGER.get());
         registerBlockModel(ModBlocks.DIRECTIONAL_CHARGER.get());
         registerBlockModel(ModBlocks.POSITIONAL_CHARGER.get());
+
+        registerBlockWithCustomLoc(ModBlocks.ANGLED_SLIME.get(), "angled_slime_0");
     }
 
-    public void registerSimpleItem(Item item)
+    private void registerSimpleItem(Item item)
     {
         singleTexture(getPath(item), mcLoc("item/generated"), "layer0", modLoc("item/" + getPath(item)));
     }
 
-    public String getPath(Item item)
+    private String getPath(Item item)
     {
         return ForgeRegistries.ITEMS.getKey(item).getPath();
     }
 
+    private void registerBlockWithCustomLoc(Block block, String loc)
+    {
+        getBuilder(ForgeRegistries.BLOCKS.getKey(block).getPath()).parent(new ModelFile.UncheckedModelFile(modLoc("block/" + loc)));
+    }
+
     private void registerBlockModel(Block block)
     {
-        String path = ForgeRegistries.BLOCKS.getKey(block).getPath();
-        getBuilder(path).parent(new ModelFile.UncheckedModelFile(modLoc("block/" + path)));
+        registerBlockWithCustomLoc(block, ForgeRegistries.BLOCKS.getKey(block).getPath());
     }
 }
