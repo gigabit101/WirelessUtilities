@@ -18,8 +18,5 @@
       ]
     }
   ],
-  "render_type": "minecraft:cutout",
-  "textures": {
-    "texture": "wirelessutils:block/charger_mark"
-  }
+  "render_type": "minecraft:cutout"
 }

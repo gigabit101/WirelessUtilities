@@ -12,7 +12,7 @@
     },
     {
       "apply": {
-        "model": "wirelessutils:block/directional_charger_mark_active",
+        "model": "wirelessutils:block/directional_condenser_mark_active",
         "x": 90,
         "y": 270
       },
@@ -33,7 +33,7 @@
     },
     {
       "apply": {
-        "model": "wirelessutils:block/directional_charger_mark_active",
+        "model": "wirelessutils:block/directional_condenser_mark_active",
         "x": -90,
         "y": 270
       },
@@ -52,7 +52,7 @@
     },
     {
       "apply": {
-        "model": "wirelessutils:block/directional_charger_mark_active"
+        "model": "wirelessutils:block/directional_condenser_mark_active"
       },
       "when": {
         "active": "true",
@@ -70,7 +70,7 @@
     },
     {
       "apply": {
-        "model": "wirelessutils:block/directional_charger_mark_active",
+        "model": "wirelessutils:block/directional_condenser_mark_active",
         "y": 180
       },
       "when": {
@@ -89,7 +89,7 @@
     },
     {
       "apply": {
-        "model": "wirelessutils:block/directional_charger_mark_active",
+        "model": "wirelessutils:block/directional_condenser_mark_active",
         "y": 270
       },
       "when": {
@@ -108,7 +108,7 @@
     },
     {
       "apply": {
-        "model": "wirelessutils:block/directional_charger_mark_active",
+        "model": "wirelessutils:block/directional_condenser_mark_active",
         "y": 90
       },
       "when": {
@@ -128,7 +128,7 @@
     },
     {
       "apply": {
-        "model": "wirelessutils:block/directional_charger_mark_active",
+        "model": "wirelessutils:block/directional_condenser_mark_active",
         "x": 90,
         "y": 360
       },
@@ -149,7 +149,7 @@
     },
     {
       "apply": {
-        "model": "wirelessutils:block/directional_charger_mark_active",
+        "model": "wirelessutils:block/directional_condenser_mark_active",
         "x": -90,
         "y": 360
       },
@@ -170,7 +170,7 @@
     },
     {
       "apply": {
-        "model": "wirelessutils:block/directional_charger_mark",
+        "model": "wirelessutils:block/directional_condenser_mark",
         "x": 90,
         "y": 270
       },
@@ -191,7 +191,7 @@
     },
     {
       "apply": {
-        "model": "wirelessutils:block/directional_charger_mark",
+        "model": "wirelessutils:block/directional_condenser_mark",
         "x": -90,
         "y": 270
       },
@@ -210,7 +210,7 @@
     },
     {
       "apply": {
-        "model": "wirelessutils:block/directional_charger_mark"
+        "model": "wirelessutils:block/directional_condenser_mark"
       },
       "when": {
         "active": "false",
@@ -228,7 +228,7 @@
     },
     {
       "apply": {
-        "model": "wirelessutils:block/directional_charger_mark",
+        "model": "wirelessutils:block/directional_condenser_mark",
         "y": 180
       },
       "when": {
@@ -247,7 +247,7 @@
     },
     {
       "apply": {
-        "model": "wirelessutils:block/directional_charger_mark",
+        "model": "wirelessutils:block/directional_condenser_mark",
         "y": 270
       },
       "when": {
@@ -266,7 +266,7 @@
     },
     {
       "apply": {
-        "model": "wirelessutils:block/directional_charger_mark",
+        "model": "wirelessutils:block/directional_condenser_mark",
         "y": 90
       },
       "when": {
@@ -286,7 +286,7 @@
     },
     {
       "apply": {
-        "model": "wirelessutils:block/directional_charger_mark",
+        "model": "wirelessutils:block/directional_condenser_mark",
         "x": 90,
         "y": 360
       },
@@ -307,7 +307,7 @@
     },
     {
       "apply": {
-        "model": "wirelessutils:block/directional_charger_mark",
+        "model": "wirelessutils:block/directional_condenser_mark",
         "x": -90,
         "y": 360
       },

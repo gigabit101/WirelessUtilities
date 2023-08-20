@@ -1,0 +1,6 @@
+{
+  "parent": "wirelessutils:block/mark_front",
+  "textures": {
+    "texture": "wirelessutils:block/charger_mark_active"
+  }
+}

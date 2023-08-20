@@ -1,0 +1,53 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "children": {
+    "block/machine_level_overlay": {
+      "parent": "minecraft:block/cube_all",
+      "render_type": "minecraft:cutout",
+      "textures": {
+        "all": "wirelessutils:block/overlay"
+      }
+    },
+    "block/positional_condenser_mark": {
+      "parent": "wirelessutils:block/mark_top",
+      "textures": {
+        "texture": "wirelessutils:block/condenser_mark"
+      }
+    },
+    "block/positional_machine_base": {
+      "parent": "wirelessutils:block/positional_machine_base"
+    }
+  },
+  "display": {
+    "firstperson_lefthand": {
+      "right_rotation": [
+        0,
+        135,
+        0
+      ],
+      "scale": [
+        0.4,
+        0.4,
+        0.4
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        0,
+        135,
+        0
+      ],
+      "scale": [
+        0.4,
+        0.4,
+        0.4
+      ]
+    }
+  },
+  "item_render_order": [
+    "block/positional_machine_base",
+    "block/positional_condenser_mark",
+    "block/machine_level_overlay"
+  ],
+  "loader": "forge:composite"
+}

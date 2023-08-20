@@ -40,7 +40,7 @@
       ]
     }
   ],
-  "render_type": "minecraft:cutout",
+  "render_type": "minecraft:solid",
   "textures": {
     "base": "wirelessutils:block/machine_base",
     "front": "wirelessutils:block/positional_front",

@@ -6,7 +6,10 @@ import com.lordmau5.wirelessutils.lib.DirectionRotatable;
 import com.lordmau5.wirelessutils.lib.ModInfo;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
+import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.*;
+import net.minecraftforge.client.model.generators.loaders.CompositeModelBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
 
@@ -18,9 +21,6 @@ public class GeneratorBlockStates extends BlockStateProvider {
 
     private BlockModelBuilder MARK_DIRECTIONAL;
     private BlockModelBuilder MARK_POSITIONAL;
-
-    private BlockModelBuilder CHARGER_DIRECTIONAL_ACTIVE;
-    private BlockModelBuilder CHARGER_DIRECTIONAL_INACTIVE;
 
     public GeneratorBlockStates(PackOutput output, ExistingFileHelper exFileHelper) {
         super(output, ModInfo.MODID, exFileHelper);
@@ -41,17 +41,16 @@ public class GeneratorBlockStates extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        // Level Overlay
-        LEVEL_OVERLAY = models().cubeAll("block/machine_level_overlay", modLoc("block/overlay"))
-                .renderType("cutout");
-
-        registerMarks();
+        registerOverlays();
 
         registerDirectionalMachines();
         registerPositionalMachines();
     }
 
-    private void registerMarks() {
+    private void registerOverlays() {
+        LEVEL_OVERLAY = models().cubeAll("block/machine_level_overlay", modLoc("block/overlay"))
+                .renderType("cutout");
+
         MARK_DIRECTIONAL = models().getBuilder("block/mark_front")
                 .element().face(Direction.NORTH).texture("#texture").end().end()
                 .renderType("cutout");
@@ -59,21 +58,6 @@ public class GeneratorBlockStates extends BlockStateProvider {
         MARK_POSITIONAL = models().getBuilder("block/mark_top")
                 .element().face(Direction.UP).texture("#texture").end().end()
                 .renderType("cutout");
-
-        CHARGER_DIRECTIONAL_INACTIVE = models().getBuilder("block/charger/inactive_directional")
-                .element().face(Direction.NORTH).texture("#single").end().end()
-                .texture("single", modLoc("block/charger_mark"))
-                .renderType("cutout");
-
-//        CHARGER_POSITIONAL_ACTIVE = models().getBuilder("block/charger/active")
-//                .element().face(Direction.NORTH).texture("#single").end().end()
-//                .texture("single", modLoc("block/charger_mark_active"))
-//                .renderType("cutout");
-//
-//        CHARGER_POSITIONAL_INACTIVE = models().getBuilder("block/charger/inactive")
-//                .element().face(Direction.NORTH).texture("#single").end().end()
-//                .texture("single", modLoc("block/charger_mark"))
-//                .renderType("cutout");
     }
 
     private void registerDirectionalMachines() {
@@ -98,17 +82,22 @@ public class GeneratorBlockStates extends BlockStateProvider {
                 .texture("front_back", modLoc("block/machine_base"))
                 .texture("side", modLoc("block/machine_side"))
                 .texture("particle", modLoc("block/machine_base"))
-                .renderType("cutout");
+                .renderType("solid");
 
-        // Charger
-        registerDirectionalCharger();
+        registerDirectionalMachine(ModBlocks.DIRECTIONAL_CHARGER.get(), "charger");
+        registerDirectionalMachine(ModBlocks.DIRECTIONAL_CONDENSER.get(), "condenser");
+        registerDirectionalMachine(ModBlocks.DIRECTIONAL_DESUBLIMATOR.get(), "desublimator");
     }
 
-    private void registerDirectionalCharger() {
-        MultiPartBlockStateBuilder builder = getMultipartBuilder(ModBlocks.DIRECTIONAL_CHARGER.get());
+    private void registerDirectionalMachine(Block block, String type) {
+        MultiPartBlockStateBuilder builder = getMultipartBuilder(block);
 
-        BlockModelBuilder active = MARK_DIRECTIONAL.texture("texture", modLoc("block/charger_mark_active"));
-        BlockModelBuilder inactive = MARK_DIRECTIONAL.texture("texture", modLoc("block/charger_mark"));
+        BlockModelBuilder active = models()
+                .withExistingParent("block/directional_" + type + "_mark_active", MARK_DIRECTIONAL.getLocation())
+                .texture("texture", modLoc("block/" + type + "_mark_active"));
+        BlockModelBuilder inactive = models()
+                .withExistingParent("block/directional_" + type + "_mark", MARK_DIRECTIONAL.getLocation())
+                .texture("texture", modLoc("block/" + type + "_mark"));
 
         BlockModelBuilder[] models = new BlockModelBuilder[]{active, inactive};
         for (int i = 0; i < 2; i++) {
@@ -133,6 +122,26 @@ public class GeneratorBlockStates extends BlockStateProvider {
         }
 
         builder.part().modelFile(LEVEL_OVERLAY).addModel();
+
+        models()
+                .withExistingParent("block/directional_" + type, "minecraft:block/cube_all")
+                .customLoader(CompositeModelBuilder::begin)
+                .child("block/directional_machine_base", models().nested().parent(DIRECTIONAL_MACHINE_BASE))
+                .child("block/directional_" + type + "_mark", inactive)
+                .child("block/machine_level_overlay", LEVEL_OVERLAY)
+                .end()
+                .transforms()
+                    .transform(ItemDisplayContext.FIRST_PERSON_LEFT_HAND)
+                        .translation(0, 0, 0)
+                        .rightRotation(0, 135, 0)
+                        .scale(0.4f, 0.4f, 0.4f)
+                    .end()
+                    .transform(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND)
+                        .translation(0, 0, 0)
+                        .leftRotation(0, 135, 0)
+                        .scale(0.4f, 0.4f, 0.4f)
+                    .end()
+                .end();
     }
 
     private void registerPositionalMachines() {
@@ -149,17 +158,22 @@ public class GeneratorBlockStates extends BlockStateProvider {
                 .texture("front", modLoc("block/positional_front"))
                 .texture("base", modLoc("block/machine_base"))
                 .texture("particle", modLoc("block/machine_base"))
-                .renderType("cutout");
+                .renderType("solid");
 
-        // Charger
-        registerPositionalCharger();
+        registerPositionalMachine(ModBlocks.POSITIONAL_CHARGER.get(), "charger");
+        registerPositionalMachine(ModBlocks.POSITIONAL_CONDENSER.get(), "condenser");
+        registerPositionalMachine(ModBlocks.POSITIONAL_DESUBLIMATOR.get(), "desublimator");
     }
 
-    private void registerPositionalCharger() {
-        MultiPartBlockStateBuilder builder = getMultipartBuilder(ModBlocks.POSITIONAL_CHARGER.get());
+    private void registerPositionalMachine(Block block, String type) {
+        MultiPartBlockStateBuilder builder = getMultipartBuilder(block);
 
-        BlockModelBuilder active = MARK_POSITIONAL.texture("texture", modLoc("block/charger_mark_active"));
-        BlockModelBuilder inactive = MARK_POSITIONAL.texture("texture", modLoc("block/charger_mark"));
+        BlockModelBuilder active = models()
+                .withExistingParent("block/positional_" + type + "_mark_active", MARK_POSITIONAL.getLocation())
+                .texture("texture", modLoc("block/" + type + "_mark_active"));
+        BlockModelBuilder inactive = models()
+                .withExistingParent("block/positional_" + type + "_mark", MARK_POSITIONAL.getLocation())
+                .texture("texture", modLoc("block/" + type + "_mark"));
 
         BlockModelBuilder[] models = new BlockModelBuilder[]{active, inactive};
         for (int i = 0; i < 2; i++) {
@@ -168,7 +182,6 @@ public class GeneratorBlockStates extends BlockStateProvider {
             for (DirectionRotatable dir : DirectionRotatable.values()) {
                 // Base textures
                 builder.part().modelFile(POSITIONAL_MACHINE_BASE)
-//                        .rotationX(getRotationX(dir))
                         .rotationY((int) dir.getOpposite().direction.toYRot())
                         .addModel()
                         .condition(BlockMachineBase.FACING, dir)
@@ -176,7 +189,6 @@ public class GeneratorBlockStates extends BlockStateProvider {
 
                 // Mark
                 builder.part().modelFile(models[i])
-//                        .rotationX(getRotationX(dir))
                         .rotationY((int) dir.getOpposite().direction.toYRot())
                         .addModel()
                         .condition(BlockMachineBase.FACING, dir)
@@ -185,5 +197,25 @@ public class GeneratorBlockStates extends BlockStateProvider {
         }
 
         builder.part().modelFile(LEVEL_OVERLAY).addModel();
+
+        models()
+                .withExistingParent("block/positional_" + type, "minecraft:block/cube_all")
+                .customLoader(CompositeModelBuilder::begin)
+                .child("block/positional_machine_base", models().nested().parent(POSITIONAL_MACHINE_BASE))
+                .child("block/positional_" + type + "_mark", inactive)
+                .child("block/machine_level_overlay", LEVEL_OVERLAY)
+                .end()
+                .transforms()
+                    .transform(ItemDisplayContext.FIRST_PERSON_LEFT_HAND)
+                        .translation(0, 0, 0)
+                        .rightRotation(0, 135, 0)
+                        .scale(0.4f, 0.4f, 0.4f)
+                    .end()
+                    .transform(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND)
+                        .translation(0, 0, 0)
+                        .leftRotation(0, 135, 0)
+                        .scale(0.4f, 0.4f, 0.4f)
+                    .end()
+                .end();
     }
 }

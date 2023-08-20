@@ -5,6 +5,8 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -18,5 +20,15 @@ public class ModCreativeTabs
             .title(Component.translatable("itemGroup.wirelessutils"))
             .displayItems((parameters, output) -> {
                 ModItems.ITEMS.getEntries().forEach(itemRegistryObject -> output.accept(itemRegistryObject.get()));
+
+                addLevelVariants(output, ModItems.DIRECTIONAL_CHARGER.get());
             }).build());
+
+    private static void addLevelVariants(CreativeModeTab.Output output, Item item) {
+        for (int i = 1; i < 5; i++) {
+            ItemStack stack = new ItemStack(item);
+            stack.getOrCreateTag().putInt("level", i);
+            output.accept(stack);
+        }
+    }
 }

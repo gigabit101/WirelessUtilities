@@ -8,6 +8,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
+import net.minecraftforge.client.model.generators.loaders.CompositeModelBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -28,10 +29,12 @@ public class GeneratorItemModels extends ItemModelProvider
         registerSimpleItem(ModItems.ITEM_QUENCHED_PEARL.get());
 //        registerSimpleItem(ModItems.ITEM_STABILIZED_PEARL.get());
 
-
-        registerBlockModel(ModBlocks.CHUNK_CHARGER.get());
         registerBlockModel(ModBlocks.DIRECTIONAL_CHARGER.get());
+        registerBlockModel(ModBlocks.DIRECTIONAL_CONDENSER.get());
+        registerBlockModel(ModBlocks.DIRECTIONAL_DESUBLIMATOR.get());
         registerBlockModel(ModBlocks.POSITIONAL_CHARGER.get());
+        registerBlockModel(ModBlocks.POSITIONAL_CONDENSER.get());
+        registerBlockModel(ModBlocks.POSITIONAL_DESUBLIMATOR.get());
 
         registerBlockWithCustomLoc(ModBlocks.ANGLED_SLIME.get(), "angled_slime_0");
     }

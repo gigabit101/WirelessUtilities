@@ -12,7 +12,7 @@
     },
     {
       "apply": {
-        "model": "wirelessutils:block/mark_top",
+        "model": "wirelessutils:block/positional_charger_mark_active",
         "y": 270
       },
       "when": {
@@ -32,7 +32,7 @@
     },
     {
       "apply": {
-        "model": "wirelessutils:block/mark_top",
+        "model": "wirelessutils:block/positional_charger_mark_active",
         "y": 270
       },
       "when": {
@@ -51,7 +51,7 @@
     },
     {
       "apply": {
-        "model": "wirelessutils:block/mark_top"
+        "model": "wirelessutils:block/positional_charger_mark_active"
       },
       "when": {
         "active": "true",
@@ -70,7 +70,7 @@
     },
     {
       "apply": {
-        "model": "wirelessutils:block/mark_top",
+        "model": "wirelessutils:block/positional_charger_mark_active",
         "y": 180
       },
       "when": {
@@ -90,7 +90,7 @@
     },
     {
       "apply": {
-        "model": "wirelessutils:block/mark_top",
+        "model": "wirelessutils:block/positional_charger_mark_active",
         "y": 270
       },
       "when": {
@@ -110,7 +110,7 @@
     },
     {
       "apply": {
-        "model": "wirelessutils:block/mark_top",
+        "model": "wirelessutils:block/positional_charger_mark_active",
         "y": 90
       },
       "when": {
@@ -130,7 +130,7 @@
     },
     {
       "apply": {
-        "model": "wirelessutils:block/mark_top",
+        "model": "wirelessutils:block/positional_charger_mark_active",
         "y": 270
       },
       "when": {
@@ -150,7 +150,7 @@
     },
     {
       "apply": {
-        "model": "wirelessutils:block/mark_top",
+        "model": "wirelessutils:block/positional_charger_mark_active",
         "y": 270
       },
       "when": {
@@ -170,7 +170,7 @@
     },
     {
       "apply": {
-        "model": "wirelessutils:block/mark_top",
+        "model": "wirelessutils:block/positional_charger_mark",
         "y": 270
       },
       "when": {
@@ -190,7 +190,7 @@
     },
     {
       "apply": {
-        "model": "wirelessutils:block/mark_top",
+        "model": "wirelessutils:block/positional_charger_mark",
         "y": 270
       },
       "when": {
@@ -209,7 +209,7 @@
     },
     {
       "apply": {
-        "model": "wirelessutils:block/mark_top"
+        "model": "wirelessutils:block/positional_charger_mark"
       },
       "when": {
         "active": "false",
@@ -228,7 +228,7 @@
     },
     {
       "apply": {
-        "model": "wirelessutils:block/mark_top",
+        "model": "wirelessutils:block/positional_charger_mark",
         "y": 180
       },
       "when": {
@@ -248,7 +248,7 @@
     },
     {
       "apply": {
-        "model": "wirelessutils:block/mark_top",
+        "model": "wirelessutils:block/positional_charger_mark",
         "y": 270
       },
       "when": {
@@ -268,7 +268,7 @@
     },
     {
       "apply": {
-        "model": "wirelessutils:block/mark_top",
+        "model": "wirelessutils:block/positional_charger_mark",
         "y": 90
       },
       "when": {
@@ -288,7 +288,7 @@
     },
     {
       "apply": {
-        "model": "wirelessutils:block/mark_top",
+        "model": "wirelessutils:block/positional_charger_mark",
         "y": 270
       },
       "when": {
@@ -308,7 +308,7 @@
     },
     {
       "apply": {
-        "model": "wirelessutils:block/mark_top",
+        "model": "wirelessutils:block/positional_charger_mark",
         "y": 270
       },
       "when": {

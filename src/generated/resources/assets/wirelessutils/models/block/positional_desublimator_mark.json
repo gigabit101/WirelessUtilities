@@ -1,0 +1,6 @@
+{
+  "parent": "wirelessutils:block/mark_top",
+  "textures": {
+    "texture": "wirelessutils:block/desublimator_mark"
+  }
+}
