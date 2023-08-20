@@ -4,30 +4,27 @@
       "faces": {
         "down": {
           "cullface": "down",
-          "rotation": 270,
-          "texture": "#side"
+          "texture": "#base"
         },
         "east": {
           "cullface": "east",
-          "rotation": 180,
-          "texture": "#side"
+          "texture": "#base"
         },
         "north": {
           "cullface": "north",
-          "texture": "#front_back"
+          "texture": "#front"
         },
         "south": {
           "cullface": "south",
-          "texture": "#front_back"
+          "texture": "#base"
         },
         "up": {
           "cullface": "up",
-          "rotation": 90,
-          "texture": "#side"
+          "texture": "#base"
         },
         "west": {
           "cullface": "west",
-          "texture": "#side"
+          "texture": "#base"
         }
       },
       "from": [
@@ -44,8 +41,8 @@
   ],
   "render_type": "minecraft:cutout",
   "textures": {
-    "front_back": "wirelessutils:block/machine_base",
-    "particle": "wirelessutils:block/machine_base",
-    "side": "wirelessutils:block/machine_side"
+    "base": "wirelessutils:block/machine_base",
+    "front": "wirelessutils:block/positional_front",
+    "particle": "wirelessutils:block/machine_base"
   }
 }

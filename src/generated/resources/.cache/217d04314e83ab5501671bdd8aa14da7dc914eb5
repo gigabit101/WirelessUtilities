@@ -1,6 +1,9 @@
-// 1.20.1	2023-08-20T17:23:05.8640563	Wireless Utilities - Block States
-206c2724ac9710cc529cdb86880ebcdcc1dadcb0 assets/wirelessutils/blockstates/directional_charger.json
-91f55ed33d3e0bb099538f5914eb1503ccf24984 assets/wirelessutils/models/block/charger_active.json
-dd628274c1a23a364faa1f1f4ac4a51e97300b61 assets/wirelessutils/models/block/charger_inactive.json
-cba43468aa5347cc0191d412c376a8eeab0d00cd assets/wirelessutils/models/block/directional_machine_base.json
+// 1.20.1	2023-08-20T18:48:19.6117495	Wireless Utilities - Block States
+e5fb9f8768fa9b71427a1c80a20d98954757ca94 assets/wirelessutils/blockstates/directional_charger.json
+ba4b0b0f6afaab6bfce4196f926a24ed057a5a36 assets/wirelessutils/blockstates/positional_charger.json
+dd628274c1a23a364faa1f1f4ac4a51e97300b61 assets/wirelessutils/models/block/charger/inactive_directional.json
+0c089c29edbc800218ef95cb25d257e8cd2b58b2 assets/wirelessutils/models/block/directional_machine_base.json
 3ab5fa247b71fbad5a3574864320196e6bfb8054 assets/wirelessutils/models/block/machine_level_overlay.json
+b65e0b57fd5594e6f80f456fd43e9bd855976d5a assets/wirelessutils/models/block/mark_front.json
+e729eb863f5d6556ff88ed1f264a7d4548cd9e62 assets/wirelessutils/models/block/mark_top.json
+2423adb25833f4b136d09a8a9a65ec485c78658a assets/wirelessutils/models/block/positional_machine_base.json

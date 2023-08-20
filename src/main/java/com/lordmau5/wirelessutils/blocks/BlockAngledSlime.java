@@ -1,6 +1,7 @@
 package com.lordmau5.wirelessutils.blocks;
 
 import com.lordmau5.wirelessutils.blocks.base.BlockMachineBase;
+import com.lordmau5.wirelessutils.lib.DirectionRotatable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -29,7 +30,7 @@ public class BlockAngledSlime extends BlockMachineBase
     public BlockAngledSlime(Properties properties)
     {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(ACTIVE, false).setValue(ROTATION, 0));
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, DirectionRotatable.NORTH).setValue(ACTIVE, false).setValue(ROTATION, 0));
     }
 
     @Override

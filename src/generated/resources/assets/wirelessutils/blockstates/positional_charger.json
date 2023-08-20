@@ -2,18 +2,7 @@
   "multipart": [
     {
       "apply": {
-        "model": "wirelessutils:block/directional_machine_base",
-        "x": 90,
-        "y": 270
-      },
-      "when": {
-        "facing": "down_z"
-      }
-    },
-    {
-      "apply": {
-        "model": "wirelessutils:block/mark_front",
-        "x": 90,
+        "model": "wirelessutils:block/positional_machine_base",
         "y": 270
       },
       "when": {
@@ -23,18 +12,27 @@
     },
     {
       "apply": {
-        "model": "wirelessutils:block/directional_machine_base",
-        "x": -90,
+        "model": "wirelessutils:block/mark_top",
         "y": 270
       },
       "when": {
+        "active": "true",
+        "facing": "down_z"
+      }
+    },
+    {
+      "apply": {
+        "model": "wirelessutils:block/positional_machine_base",
+        "y": 270
+      },
+      "when": {
+        "active": "true",
         "facing": "up_z"
       }
     },
     {
       "apply": {
-        "model": "wirelessutils:block/mark_front",
-        "x": -90,
+        "model": "wirelessutils:block/mark_top",
         "y": 270
       },
       "when": {
@@ -44,15 +42,7 @@
     },
     {
       "apply": {
-        "model": "wirelessutils:block/directional_machine_base"
-      },
-      "when": {
-        "facing": "north"
-      }
-    },
-    {
-      "apply": {
-        "model": "wirelessutils:block/mark_front"
+        "model": "wirelessutils:block/positional_machine_base"
       },
       "when": {
         "active": "true",
@@ -61,16 +51,16 @@
     },
     {
       "apply": {
-        "model": "wirelessutils:block/directional_machine_base",
-        "y": 180
+        "model": "wirelessutils:block/mark_top"
       },
       "when": {
-        "facing": "south"
+        "active": "true",
+        "facing": "north"
       }
     },
     {
       "apply": {
-        "model": "wirelessutils:block/mark_front",
+        "model": "wirelessutils:block/positional_machine_base",
         "y": 180
       },
       "when": {
@@ -80,16 +70,27 @@
     },
     {
       "apply": {
-        "model": "wirelessutils:block/directional_machine_base",
+        "model": "wirelessutils:block/mark_top",
+        "y": 180
+      },
+      "when": {
+        "active": "true",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "wirelessutils:block/positional_machine_base",
         "y": 270
       },
       "when": {
+        "active": "true",
         "facing": "west"
       }
     },
     {
       "apply": {
-        "model": "wirelessutils:block/mark_front",
+        "model": "wirelessutils:block/mark_top",
         "y": 270
       },
       "when": {
@@ -99,16 +100,7 @@
     },
     {
       "apply": {
-        "model": "wirelessutils:block/directional_machine_base",
-        "y": 90
-      },
-      "when": {
-        "facing": "east"
-      }
-    },
-    {
-      "apply": {
-        "model": "wirelessutils:block/mark_front",
+        "model": "wirelessutils:block/positional_machine_base",
         "y": 90
       },
       "when": {
@@ -118,19 +110,18 @@
     },
     {
       "apply": {
-        "model": "wirelessutils:block/directional_machine_base",
-        "x": 90,
-        "y": 360
+        "model": "wirelessutils:block/mark_top",
+        "y": 90
       },
       "when": {
-        "facing": "down_x"
+        "active": "true",
+        "facing": "east"
       }
     },
     {
       "apply": {
-        "model": "wirelessutils:block/mark_front",
-        "x": 90,
-        "y": 360
+        "model": "wirelessutils:block/positional_machine_base",
+        "y": 270
       },
       "when": {
         "active": "true",
@@ -139,19 +130,18 @@
     },
     {
       "apply": {
-        "model": "wirelessutils:block/directional_machine_base",
-        "x": -90,
-        "y": 360
+        "model": "wirelessutils:block/mark_top",
+        "y": 270
       },
       "when": {
-        "facing": "up_x"
+        "active": "true",
+        "facing": "down_x"
       }
     },
     {
       "apply": {
-        "model": "wirelessutils:block/mark_front",
-        "x": -90,
-        "y": 360
+        "model": "wirelessutils:block/positional_machine_base",
+        "y": 270
       },
       "when": {
         "active": "true",
@@ -160,156 +150,166 @@
     },
     {
       "apply": {
-        "model": "wirelessutils:block/directional_machine_base",
-        "x": 90,
+        "model": "wirelessutils:block/mark_top",
         "y": 270
       },
       "when": {
-        "facing": "down_z"
-      }
-    },
-    {
-      "apply": {
-        "model": "wirelessutils:block/mark_front",
-        "x": 90,
-        "y": 270
-      },
-      "when": {
-        "active": "false",
-        "facing": "down_z"
-      }
-    },
-    {
-      "apply": {
-        "model": "wirelessutils:block/directional_machine_base",
-        "x": -90,
-        "y": 270
-      },
-      "when": {
-        "facing": "up_z"
-      }
-    },
-    {
-      "apply": {
-        "model": "wirelessutils:block/mark_front",
-        "x": -90,
-        "y": 270
-      },
-      "when": {
-        "active": "false",
-        "facing": "up_z"
-      }
-    },
-    {
-      "apply": {
-        "model": "wirelessutils:block/directional_machine_base"
-      },
-      "when": {
-        "facing": "north"
-      }
-    },
-    {
-      "apply": {
-        "model": "wirelessutils:block/mark_front"
-      },
-      "when": {
-        "active": "false",
-        "facing": "north"
-      }
-    },
-    {
-      "apply": {
-        "model": "wirelessutils:block/directional_machine_base",
-        "y": 180
-      },
-      "when": {
-        "facing": "south"
-      }
-    },
-    {
-      "apply": {
-        "model": "wirelessutils:block/mark_front",
-        "y": 180
-      },
-      "when": {
-        "active": "false",
-        "facing": "south"
-      }
-    },
-    {
-      "apply": {
-        "model": "wirelessutils:block/directional_machine_base",
-        "y": 270
-      },
-      "when": {
-        "facing": "west"
-      }
-    },
-    {
-      "apply": {
-        "model": "wirelessutils:block/mark_front",
-        "y": 270
-      },
-      "when": {
-        "active": "false",
-        "facing": "west"
-      }
-    },
-    {
-      "apply": {
-        "model": "wirelessutils:block/directional_machine_base",
-        "y": 90
-      },
-      "when": {
-        "facing": "east"
-      }
-    },
-    {
-      "apply": {
-        "model": "wirelessutils:block/mark_front",
-        "y": 90
-      },
-      "when": {
-        "active": "false",
-        "facing": "east"
-      }
-    },
-    {
-      "apply": {
-        "model": "wirelessutils:block/directional_machine_base",
-        "x": 90,
-        "y": 360
-      },
-      "when": {
-        "facing": "down_x"
-      }
-    },
-    {
-      "apply": {
-        "model": "wirelessutils:block/mark_front",
-        "x": 90,
-        "y": 360
-      },
-      "when": {
-        "active": "false",
-        "facing": "down_x"
-      }
-    },
-    {
-      "apply": {
-        "model": "wirelessutils:block/directional_machine_base",
-        "x": -90,
-        "y": 360
-      },
-      "when": {
+        "active": "true",
         "facing": "up_x"
       }
     },
     {
       "apply": {
-        "model": "wirelessutils:block/mark_front",
-        "x": -90,
-        "y": 360
+        "model": "wirelessutils:block/positional_machine_base",
+        "y": 270
+      },
+      "when": {
+        "active": "false",
+        "facing": "down_z"
+      }
+    },
+    {
+      "apply": {
+        "model": "wirelessutils:block/mark_top",
+        "y": 270
+      },
+      "when": {
+        "active": "false",
+        "facing": "down_z"
+      }
+    },
+    {
+      "apply": {
+        "model": "wirelessutils:block/positional_machine_base",
+        "y": 270
+      },
+      "when": {
+        "active": "false",
+        "facing": "up_z"
+      }
+    },
+    {
+      "apply": {
+        "model": "wirelessutils:block/mark_top",
+        "y": 270
+      },
+      "when": {
+        "active": "false",
+        "facing": "up_z"
+      }
+    },
+    {
+      "apply": {
+        "model": "wirelessutils:block/positional_machine_base"
+      },
+      "when": {
+        "active": "false",
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "wirelessutils:block/mark_top"
+      },
+      "when": {
+        "active": "false",
+        "facing": "north"
+      }
+    },
+    {
+      "apply": {
+        "model": "wirelessutils:block/positional_machine_base",
+        "y": 180
+      },
+      "when": {
+        "active": "false",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "wirelessutils:block/mark_top",
+        "y": 180
+      },
+      "when": {
+        "active": "false",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "wirelessutils:block/positional_machine_base",
+        "y": 270
+      },
+      "when": {
+        "active": "false",
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "wirelessutils:block/mark_top",
+        "y": 270
+      },
+      "when": {
+        "active": "false",
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "wirelessutils:block/positional_machine_base",
+        "y": 90
+      },
+      "when": {
+        "active": "false",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "wirelessutils:block/mark_top",
+        "y": 90
+      },
+      "when": {
+        "active": "false",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "wirelessutils:block/positional_machine_base",
+        "y": 270
+      },
+      "when": {
+        "active": "false",
+        "facing": "down_x"
+      }
+    },
+    {
+      "apply": {
+        "model": "wirelessutils:block/mark_top",
+        "y": 270
+      },
+      "when": {
+        "active": "false",
+        "facing": "down_x"
+      }
+    },
+    {
+      "apply": {
+        "model": "wirelessutils:block/positional_machine_base",
+        "y": 270
+      },
+      "when": {
+        "active": "false",
+        "facing": "up_x"
+      }
+    },
+    {
+      "apply": {
+        "model": "wirelessutils:block/mark_top",
+        "y": 270
       },
       "when": {
         "active": "false",

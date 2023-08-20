@@ -2,8 +2,8 @@
   "elements": [
     {
       "faces": {
-        "north": {
-          "texture": "#single"
+        "up": {
+          "texture": "#texture"
         }
       },
       "from": [
@@ -20,6 +20,6 @@
   ],
   "render_type": "minecraft:cutout",
   "textures": {
-    "single": "wirelessutils:block/charger_mark_active"
+    "texture": "wirelessutils:block/charger_mark"
   }
 }
