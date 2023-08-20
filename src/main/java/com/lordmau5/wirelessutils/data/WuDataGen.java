@@ -14,6 +14,7 @@ public class WuDataGen
     {
         DataGenerator generator = event.getGenerator();
 
+        generator.addProvider(event.includeClient(), new GeneratorBlockStates(generator.getPackOutput(), event.getExistingFileHelper()));
         generator.addProvider(event.includeServer(), new GeneratorRecipes(generator.getPackOutput()));
         generator.addProvider(event.includeClient(), new GeneratorItemModels(generator, event.getExistingFileHelper()));
         generator.addProvider(event.includeClient(), new GeneratorLanguage(generator));

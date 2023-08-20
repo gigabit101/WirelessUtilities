@@ -1,0 +1,65 @@
+{
+  "display": {
+    "firstperson_righthand": {
+      "rotation": [
+        0,
+        135,
+        0
+      ],
+      "scale": [
+        0.4,
+        0.4,
+        0.4
+      ]
+    }
+  },
+  "elements": [
+    {
+      "faces": {
+        "down": {
+          "cullface": "down",
+          "rotation": 270,
+          "texture": "#side"
+        },
+        "east": {
+          "cullface": "east",
+          "rotation": 180,
+          "texture": "#side"
+        },
+        "north": {
+          "cullface": "north",
+          "texture": "#front_back"
+        },
+        "south": {
+          "cullface": "south",
+          "texture": "#front_back"
+        },
+        "up": {
+          "cullface": "up",
+          "rotation": 90,
+          "texture": "#side"
+        },
+        "west": {
+          "cullface": "west",
+          "texture": "#side"
+        }
+      },
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ]
+    }
+  ],
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "front_back": "wirelessutils:block/machine_base",
+    "particle": "wirelessutils:block/machine_base",
+    "side": "wirelessutils:block/machine_side"
+  }
+}
