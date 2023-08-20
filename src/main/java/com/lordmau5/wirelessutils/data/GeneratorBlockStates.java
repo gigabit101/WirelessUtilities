@@ -6,10 +6,7 @@ import com.lordmau5.wirelessutils.lib.ModInfo;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.ItemDisplayContext;
-import net.minecraftforge.client.model.generators.BlockModelBuilder;
-import net.minecraftforge.client.model.generators.BlockStateProvider;
-import net.minecraftforge.client.model.generators.ModelBuilder;
-import net.minecraftforge.client.model.generators.MultiPartBlockStateBuilder;
+import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
 
@@ -63,6 +60,7 @@ public class GeneratorBlockStates extends BlockStateProvider {
 
     private void registerDirectionalMachines() {
         DIRECTIONAL_MACHINE_BASE = models().getBuilder("block/directional_machine_base")
+                .parent(new ModelFile.UncheckedModelFile(mcLoc("minecraft:block/cube_all")))
                 .element().allFaces((dir, builder) -> {
                     if (dir == Direction.NORTH || dir == Direction.SOUTH)
                         builder.texture("#front_back");
