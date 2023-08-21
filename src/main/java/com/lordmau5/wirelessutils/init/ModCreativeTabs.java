@@ -1,5 +1,6 @@
 package com.lordmau5.wirelessutils.init;
 
+import com.lordmau5.wirelessutils.lib.MachineLevel;
 import com.lordmau5.wirelessutils.lib.ModInfo;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -25,7 +26,7 @@ public class ModCreativeTabs
             }).build());
 
     private static void addLevelVariants(CreativeModeTab.Output output, Item item) {
-        for (int i = 1; i < 5; i++) {
+        for (int i = 1; i <= MachineLevel.getMaxLevel().ordinal(); i++) {
             ItemStack stack = new ItemStack(item);
             stack.getOrCreateTag().putInt("level", i);
             output.accept(stack);

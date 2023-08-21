@@ -48,15 +48,32 @@ public class GeneratorBlockStates extends BlockStateProvider {
     }
 
     private void registerOverlays() {
-        LEVEL_OVERLAY = models().cubeAll("block/machine_level_overlay", modLoc("block/overlay"))
+        MARK_DIRECTIONAL = models()
+                .getBuilder("block/mark_front")
+                    .element()
+                        .face(Direction.NORTH)
+                        .tintindex(1)
+                        .texture("#texture")
+                    .end()
+                .end()
                 .renderType("cutout");
 
-        MARK_DIRECTIONAL = models().getBuilder("block/mark_front")
-                .element().face(Direction.NORTH).texture("#texture").end().end()
+        MARK_POSITIONAL = models()
+                .getBuilder("block/mark_top")
+                    .element()
+                        .face(Direction.NORTH)
+                        .tintindex(1)
+                        .texture("#texture")
+                    .end()
+                .end()
                 .renderType("cutout");
 
-        MARK_POSITIONAL = models().getBuilder("block/mark_top")
-                .element().face(Direction.UP).texture("#texture").end().end()
+        LEVEL_OVERLAY = models().withExistingParent("block/machine_level_overlay", "block/cube")
+                .texture("texture", modLoc("block/overlay"))
+                .element()
+                    .cube("#texture")
+                    .faces((dir, builder) -> builder.tintindex(2))
+                .end()
                 .renderType("cutout");
     }
 

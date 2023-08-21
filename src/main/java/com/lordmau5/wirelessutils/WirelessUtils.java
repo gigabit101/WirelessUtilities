@@ -1,5 +1,6 @@
 package com.lordmau5.wirelessutils;
 
+import com.lordmau5.wirelessutils.init.ModBlockEntities;
 import com.lordmau5.wirelessutils.init.ModBlocks;
 import com.lordmau5.wirelessutils.init.ModCreativeTabs;
 import com.lordmau5.wirelessutils.init.ModItems;
@@ -47,6 +48,8 @@ public class WirelessUtils
         ModBlocks.BLOCKS.register(modEventBus);
         // Register the Deferred Register to the mod event bus so items get registered
         ModItems.ITEMS.register(modEventBus);
+        // Register Block Entities
+        ModBlockEntities.BLOCK_ENTITIES.register(modEventBus);
         // Register the Deferred Register to the mod event bus so tabs get registered
         ModCreativeTabs.CREATIVE_MODE_TABS.register(modEventBus);
 

@@ -5,8 +5,11 @@ import com.lordmau5.wirelessutils.blocks.base.BlockMachineBase;
 import com.lordmau5.wirelessutils.blocks.charger.BlockDirectionalCharger;
 import com.lordmau5.wirelessutils.blocks.charger.BlockPositionalCharger;
 import com.lordmau5.wirelessutils.lib.ModInfo;
+import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -23,6 +26,5 @@ public class ModBlocks
     public static final RegistryObject<Block> POSITIONAL_CHARGER = BLOCKS.register("positional_charger", () -> new BlockPositionalCharger(BlockBehaviour.Properties.of()));
     public static final RegistryObject<Block> POSITIONAL_CONDENSER = BLOCKS.register("positional_condenser", () -> new BlockMachineBase(BlockBehaviour.Properties.of()));
     public static final RegistryObject<Block> POSITIONAL_DESUBLIMATOR = BLOCKS.register("positional_desublimator", () -> new BlockMachineBase(BlockBehaviour.Properties.of()));
-
 
 }
