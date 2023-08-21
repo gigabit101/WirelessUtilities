@@ -16,12 +16,6 @@ public class BlockColorMachine implements BlockColor {
     public int getColor(BlockState state, @Nullable BlockAndTintGetter level, @Nullable BlockPos pos, int tintIndex) {
         if (level == null || pos == null || tintIndex != 2) return 0xFFFFFF;
 
-//        if (!state.hasProperty(BlockMachineBase.LEVEL)) return 0xFFFFFF;
-//
-//        MachineLevel machineLevel = MachineLevel.fromInt(state.getValue(BlockMachineBase.LEVEL));
-//        return machineLevel.color;
-
-//        // TODO: Sync tile data and use that instead?
         BlockEntity be = level.getBlockEntity(pos);
         if (!(be instanceof BlockEntityMachineBase machineBase)) return 0xFFFFFF;
 

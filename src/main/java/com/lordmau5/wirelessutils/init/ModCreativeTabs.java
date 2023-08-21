@@ -11,6 +11,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.util.Arrays;
+
 public class ModCreativeTabs
 {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, ModInfo.MODID);
@@ -20,13 +22,17 @@ public class ModCreativeTabs
             .icon(() -> ModItems.ITEM_VOID_PEARL.get().getDefaultInstance())
             .title(Component.translatable("itemGroup.wirelessutils"))
             .displayItems((parameters, output) -> {
-                ModItems.ITEMS.getEntries().forEach(itemRegistryObject -> output.accept(itemRegistryObject.get()));
+                ModItems.ITEMS.getEntries().forEach(itemRegistryObject -> {
+                    if (ModItems.TIERED_MACHINES.contains(itemRegistryObject)) return;
 
-                addLevelVariants(output, ModItems.DIRECTIONAL_CHARGER.get());
+                    output.accept(itemRegistryObject.get());
+                });
+
+                ModItems.TIERED_MACHINES.forEach(item -> addLevelVariants(output, item.get()));
             }).build());
 
     private static void addLevelVariants(CreativeModeTab.Output output, Item item) {
-        for (int i = 1; i <= MachineLevel.getMaxLevel().ordinal(); i++) {
+        for (int i = 0; i <= MachineLevel.getMaxLevel().ordinal(); i++) {
             ItemStack stack = new ItemStack(item);
             stack.getOrCreateTag().putInt("machineLevel", i);
             output.accept(stack);

@@ -2,57 +2,7 @@
   "parent": "minecraft:block/cube_all",
   "children": {
     "block/machine_level_overlay": {
-      "parent": "minecraft:block/cube",
-      "elements": [
-        {
-          "faces": {
-            "down": {
-              "cullface": "down",
-              "texture": "#texture",
-              "tintindex": 2
-            },
-            "east": {
-              "cullface": "east",
-              "texture": "#texture",
-              "tintindex": 2
-            },
-            "north": {
-              "cullface": "north",
-              "texture": "#texture",
-              "tintindex": 2
-            },
-            "south": {
-              "cullface": "south",
-              "texture": "#texture",
-              "tintindex": 2
-            },
-            "up": {
-              "cullface": "up",
-              "texture": "#texture",
-              "tintindex": 2
-            },
-            "west": {
-              "cullface": "west",
-              "texture": "#texture",
-              "tintindex": 2
-            }
-          },
-          "from": [
-            0,
-            0,
-            0
-          ],
-          "to": [
-            16,
-            16,
-            16
-          ]
-        }
-      ],
-      "render_type": "minecraft:cutout",
-      "textures": {
-        "texture": "wirelessutils:block/overlay"
-      }
+      "parent": "wirelessutils:block/machine_level_overlay"
     },
     "block/positional_charger_mark": {
       "parent": "wirelessutils:block/mark_top",

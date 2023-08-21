@@ -1,5 +1,6 @@
-package com.lordmau5.wirelessutils.blockentity;
+package com.lordmau5.wirelessutils.blockentity.charger;
 
+import com.lordmau5.wirelessutils.blockentity.BlockEntityMachineBase;
 import com.lordmau5.wirelessutils.init.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntityType;

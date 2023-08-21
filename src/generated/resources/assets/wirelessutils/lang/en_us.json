@@ -1,9 +1,14 @@
 {
   "block.wirelessutils.directional_charger": "Directional Charger",
+  "block.wirelessutils.directional_condenser": "Directional Condenser",
+  "block.wirelessutils.directional_desublimator": "Directional Desublimator",
+  "block.wirelessutils.positional_charger": "Positional Charger",
+  "block.wirelessutils.positional_condenser": "Positional Condenser",
+  "block.wirelessutils.positional_desublimator": "Positional Desublimator",
   "item.wirelessutils.ender_coil": "Ender Coil",
   "item.wirelessutils.glasses": "Work Glasses",
   "item.wirelessutils.void_pearl": "Void Pearl",
   "itemGroup.wirelessutils": "Wireless Utilities",
-  "wirelessutils.info.tiered.creative": "(Tier Creative)",
+  "wirelessutils.info.tiered.creative": "(Creative)",
   "wirelessutils.info.tiered.tier": "(Tier %s)"
 }

@@ -13,6 +13,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.client.model.data.ModelData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -78,5 +79,10 @@ public abstract class BlockEntityMachineBase extends BlockEntity {
         super.onDataPacket(net, pkt);
 
         updateBlock();
+    }
+
+    @Override
+    public @NotNull ModelData getModelData() {
+        return super.getModelData();
     }
 }

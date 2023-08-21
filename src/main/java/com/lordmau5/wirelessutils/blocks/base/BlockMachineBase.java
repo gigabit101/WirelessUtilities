@@ -109,7 +109,7 @@ public class BlockMachineBase extends Block implements EntityBlock
         return stack;
     }
 
-    //    @Override
+//        @Override
 //    public BlockState rotate(BlockState pState, Rotation pRot) {
 //        return pState.setValue(FACING, pRot.rotate(pState.getValue(FACING)));
 //    }

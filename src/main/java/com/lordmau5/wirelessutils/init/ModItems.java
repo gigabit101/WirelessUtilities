@@ -9,6 +9,10 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class ModItems
 {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, ModInfo.MODID);
@@ -33,10 +37,21 @@ public class ModItems
     //Blocks
     public static final RegistryObject<Item> ANGLED_SLIME = ITEMS.register("angled_slime", () -> new BlockItem(ModBlocks.ANGLED_SLIME.get(), new Item.Properties()));
     public static final RegistryObject<Item> DIRECTIONAL_CHARGER = ITEMS.register("directional_charger", () -> new ItemBlockMachine(ModBlocks.DIRECTIONAL_CHARGER.get(), new Item.Properties()));
-    public static final RegistryObject<Item> DIRECTIONAL_CONDENSER = ITEMS.register("directional_condenser", () -> new BlockItem(ModBlocks.DIRECTIONAL_CONDENSER.get(), new Item.Properties()));
-    public static final RegistryObject<Item> DIRECTIONAL_DESUBLIMATOR = ITEMS.register("directional_desublimator", () -> new BlockItem(ModBlocks.DIRECTIONAL_DESUBLIMATOR.get(), new Item.Properties()));
-    public static final RegistryObject<Item> POSITIONAL_CHARGER = ITEMS.register("positional_charger", () -> new BlockItem(ModBlocks.POSITIONAL_CHARGER.get(), new Item.Properties()));
-    public static final RegistryObject<Item> POSITIONAL_CONDENSER = ITEMS.register("positional_condenser", () -> new BlockItem(ModBlocks.POSITIONAL_CONDENSER.get(), new Item.Properties()));
-    public static final RegistryObject<Item> POSITIONAL_DESUBLIMATOR = ITEMS.register("positional_desublimator", () -> new BlockItem(ModBlocks.POSITIONAL_DESUBLIMATOR.get(), new Item.Properties()));
+    public static final RegistryObject<Item> DIRECTIONAL_CONDENSER = ITEMS.register("directional_condenser", () -> new ItemBlockMachine(ModBlocks.DIRECTIONAL_CONDENSER.get(), new Item.Properties()));
+    public static final RegistryObject<Item> DIRECTIONAL_DESUBLIMATOR = ITEMS.register("directional_desublimator", () -> new ItemBlockMachine(ModBlocks.DIRECTIONAL_DESUBLIMATOR.get(), new Item.Properties()));
+    public static final RegistryObject<Item> POSITIONAL_CHARGER = ITEMS.register("positional_charger", () -> new ItemBlockMachine(ModBlocks.POSITIONAL_CHARGER.get(), new Item.Properties()));
+    public static final RegistryObject<Item> POSITIONAL_CONDENSER = ITEMS.register("positional_condenser", () -> new ItemBlockMachine(ModBlocks.POSITIONAL_CONDENSER.get(), new Item.Properties()));
+    public static final RegistryObject<Item> POSITIONAL_DESUBLIMATOR = ITEMS.register("positional_desublimator", () -> new ItemBlockMachine(ModBlocks.POSITIONAL_DESUBLIMATOR.get(), new Item.Properties()));
+
+
+    public static final List<RegistryObject<Item>> TIERED_MACHINES = Arrays.asList(
+            DIRECTIONAL_CHARGER,
+            DIRECTIONAL_CONDENSER,
+            DIRECTIONAL_DESUBLIMATOR,
+
+            POSITIONAL_CHARGER,
+            POSITIONAL_CONDENSER,
+            POSITIONAL_DESUBLIMATOR
+    );
 
 }
