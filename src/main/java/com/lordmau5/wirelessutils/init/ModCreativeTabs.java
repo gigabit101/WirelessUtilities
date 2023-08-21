@@ -28,7 +28,7 @@ public class ModCreativeTabs
     private static void addLevelVariants(CreativeModeTab.Output output, Item item) {
         for (int i = 1; i <= MachineLevel.getMaxLevel().ordinal(); i++) {
             ItemStack stack = new ItemStack(item);
-            stack.getOrCreateTag().putInt("level", i);
+            stack.getOrCreateTag().putInt("machineLevel", i);
             output.accept(stack);
         }
     }

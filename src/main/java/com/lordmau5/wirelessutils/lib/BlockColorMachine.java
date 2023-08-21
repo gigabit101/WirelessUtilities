@@ -7,6 +7,7 @@ import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
@@ -15,16 +16,16 @@ public class BlockColorMachine implements BlockColor {
     public int getColor(BlockState state, @Nullable BlockAndTintGetter level, @Nullable BlockPos pos, int tintIndex) {
         if (level == null || pos == null || tintIndex != 2) return 0xFFFFFF;
 
-        if (!state.hasProperty(BlockMachineBase.LEVEL)) return 0xFFFFFF;
+//        if (!state.hasProperty(BlockMachineBase.LEVEL)) return 0xFFFFFF;
+//
+//        MachineLevel machineLevel = MachineLevel.fromInt(state.getValue(BlockMachineBase.LEVEL));
+//        return machineLevel.color;
 
-        MachineLevel machineLevel = MachineLevel.fromInt(state.getValue(BlockMachineBase.LEVEL));
-        return machineLevel.color;
+//        // TODO: Sync tile data and use that instead?
+        BlockEntity be = level.getBlockEntity(pos);
+        if (!(be instanceof BlockEntityMachineBase machineBase)) return 0xFFFFFF;
 
-        // TODO: Sync tile data and use that instead?
-//        BlockEntity be = level.getBlockEntity(pos);
-//        if (!(be instanceof BlockEntityMachineBase machineBase)) return 0xFFFFFF;
-
-//        return machineBase.getMachineLevel().color;
+        return machineBase.getMachineLevel().color;
     }
 
     public static Block[] getBlocks() {

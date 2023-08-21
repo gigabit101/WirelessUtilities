@@ -61,7 +61,7 @@ public class GeneratorBlockStates extends BlockStateProvider {
         MARK_POSITIONAL = models()
                 .getBuilder("block/mark_top")
                     .element()
-                        .face(Direction.NORTH)
+                        .face(Direction.UP)
                         .tintindex(1)
                         .texture("#texture")
                     .end()

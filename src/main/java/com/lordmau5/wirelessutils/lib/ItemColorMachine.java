@@ -14,7 +14,7 @@ public class ItemColorMachine implements ItemColor {
 
         CompoundTag tag = stack.getOrCreateTag();
 
-        int level = tag.contains("level") ? tag.getInt("level") : 0;
+        int level = tag.contains("machineLevel") ? tag.getInt("machineLevel") : 0;
 
         return MachineLevel.fromInt(level).color;
     }

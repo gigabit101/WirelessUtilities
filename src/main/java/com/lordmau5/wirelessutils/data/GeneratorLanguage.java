@@ -1,5 +1,6 @@
 package com.lordmau5.wirelessutils.data;
 
+import com.lordmau5.wirelessutils.init.ModBlocks;
 import com.lordmau5.wirelessutils.init.ModItems;
 import com.lordmau5.wirelessutils.lib.ModInfo;
 import net.minecraft.data.DataGenerator;
@@ -12,6 +13,11 @@ public class GeneratorLanguage extends LanguageProvider
         super(gen.getPackOutput(), ModInfo.MODID, "en_us");
     }
 
+    private void addMod(String key, String value)
+    {
+        add(ModInfo.MODID + "." + key, value);
+    }
+
     @Override
     protected void addTranslations()
     {
@@ -19,5 +25,10 @@ public class GeneratorLanguage extends LanguageProvider
         add(ModItems.ITEM_VOID_PEARL.get(), "Void Pearl");
         add(ModItems.ITEM_ENDER_COIL.get(), "Ender Coil");
         add(ModItems.ITEM_GLASSES.get(), "Work Glasses");
+
+        addMod("info.tiered.tier", "(Tier %s)");
+        addMod("info.tiered.creative", "(Tier Creative)");
+
+        add(ModBlocks.DIRECTIONAL_CHARGER.get(), "Directional Charger");
     }
 }

@@ -1,5 +1,6 @@
 package com.lordmau5.wirelessutils.init;
 
+import com.lordmau5.wirelessutils.items.ItemBlockMachine;
 import com.lordmau5.wirelessutils.items.ItemGlasses;
 import com.lordmau5.wirelessutils.lib.ModInfo;
 import net.minecraft.world.item.BlockItem;
@@ -31,7 +32,7 @@ public class ModItems
 
     //Blocks
     public static final RegistryObject<Item> ANGLED_SLIME = ITEMS.register("angled_slime", () -> new BlockItem(ModBlocks.ANGLED_SLIME.get(), new Item.Properties()));
-    public static final RegistryObject<Item> DIRECTIONAL_CHARGER = ITEMS.register("directional_charger", () -> new BlockItem(ModBlocks.DIRECTIONAL_CHARGER.get(), new Item.Properties()));
+    public static final RegistryObject<Item> DIRECTIONAL_CHARGER = ITEMS.register("directional_charger", () -> new ItemBlockMachine(ModBlocks.DIRECTIONAL_CHARGER.get(), new Item.Properties()));
     public static final RegistryObject<Item> DIRECTIONAL_CONDENSER = ITEMS.register("directional_condenser", () -> new BlockItem(ModBlocks.DIRECTIONAL_CONDENSER.get(), new Item.Properties()));
     public static final RegistryObject<Item> DIRECTIONAL_DESUBLIMATOR = ITEMS.register("directional_desublimator", () -> new BlockItem(ModBlocks.DIRECTIONAL_DESUBLIMATOR.get(), new Item.Properties()));
     public static final RegistryObject<Item> POSITIONAL_CHARGER = ITEMS.register("positional_charger", () -> new BlockItem(ModBlocks.POSITIONAL_CHARGER.get(), new Item.Properties()));

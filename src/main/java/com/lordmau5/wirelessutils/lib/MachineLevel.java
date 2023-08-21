@@ -1,6 +1,9 @@
 package com.lordmau5.wirelessutils.lib;
 
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 
@@ -64,14 +67,13 @@ public class MachineLevel {
         if ( stack == null || stack.isEmpty() )
             return MachineLevel.getMinLevel();
 
-//        // Preparation for 1.13
-//        if ( stack.hasTagCompound() ) {
-//            NBTTagCompound tag = stack.getTagCompound();
-//            if ( tag != null && tag.hasKey("Level") ) {
-//                return Level.getLevel(tag.getByte("Level"));
-//            }
-//        }
-        return MachineLevel.fromInt(stack.getDamageValue());
+        if ( stack.hasTag() ) {
+            CompoundTag tag = stack.getTag();
+            if ( tag != null && tag.contains("machineLevel", Tag.TAG_INT) ) {
+                return MachineLevel.getLevel(tag.getInt("machineLevel"));
+            }
+        }
+        return MachineLevel.getMinLevel();
     }
 
     public static MachineLevel[] values() {
@@ -185,21 +187,26 @@ public class MachineLevel {
         return toInt(this);
     }
 
-    public Component getTextComponent() {
-        return Component.literal(getName()).withStyle(rarity.getStyleModifier());
+    public Component getTextComponent(Component baseName) {
+        MutableComponent component = Component.empty();
+
+        component.append(baseName);
+        component.append(" ");
+        component.append(getName());
+
+        return component.withStyle(rarity.getStyleModifier());
     }
 
-    public String getName() {
+    public Component getName() {
         if ( name != null )
-            return name;
+            return Component.literal(name);
 
-//        String key = "info." + ModInfo.MODID + ".tiered.level." + (isCreative ? "creative" : toInt());
-//        if ( StringHelper.canLocalize(key) )
-//            return StringHelper.localize(key);
-
-        return Component.translatable(
-                "info." + ModInfo.MODID + ".tiered.tier",
-                toInt() + 1
-        ).toString();
+        if (toInt() == getMaxLevel().toInt())
+            return Component.translatable(ModInfo.MODID + ".info.tiered.creative");
+        else
+            return Component.translatable(
+                    ModInfo.MODID + ".info.tiered.tier",
+                    toInt() + 1
+            );
     }
 }

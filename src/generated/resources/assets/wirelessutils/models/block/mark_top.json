@@ -3,7 +3,8 @@
     {
       "faces": {
         "up": {
-          "texture": "#texture"
+          "texture": "#texture",
+          "tintindex": 1
         }
       },
       "from": [

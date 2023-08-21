@@ -15,6 +15,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -25,18 +26,18 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.level.gameevent.GameEventListener;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.Nullable;
 
 public class BlockMachineBase extends Block implements EntityBlock
 {
     public static final EnumProperty<DirectionRotatable> FACING = EnumProperty.create("facing", DirectionRotatable.class);
     public static final BooleanProperty ACTIVE = BooleanProperty.create("active");
-    public static final IntegerProperty LEVEL = IntegerProperty.create("level", 0, 6);
 
     public BlockMachineBase(Properties properties)
     {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, DirectionRotatable.NORTH).setValue(ACTIVE, false).setValue(LEVEL, 0));
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, DirectionRotatable.NORTH).setValue(ACTIVE, false));
     }
 
     @Override
@@ -52,7 +53,7 @@ public class BlockMachineBase extends Block implements EntityBlock
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder)
     {
-        builder.add(FACING, ACTIVE, LEVEL);
+        builder.add(FACING, ACTIVE);
     }
 
     @Override
@@ -90,10 +91,22 @@ public class BlockMachineBase extends Block implements EntityBlock
         if (pLevel.isClientSide) return;
 
         CompoundTag tag = pStack.getOrCreateTag();
-        if (!tag.contains("level")) return;
+        if (!tag.contains("machineLevel")) return;
 
-        MachineLevel level = MachineLevel.fromInt(tag.getInt("level"));
+        MachineLevel level = MachineLevel.fromInt(tag.getInt("machineLevel"));
         machineBase.setMachineLevel(level);
+    }
+
+    @Override
+    public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter level, BlockPos pos, Player player) {
+        ItemStack stack = super.getCloneItemStack(state, target, level, pos, player);
+
+        BlockEntity be = level.getBlockEntity(pos);
+        if (be instanceof BlockEntityMachineBase machineBase) {
+            stack.getOrCreateTag().putInt("machineLevel", machineBase.getMachineLevel().ordinal());
+        }
+
+        return stack;
     }
 
     //    @Override

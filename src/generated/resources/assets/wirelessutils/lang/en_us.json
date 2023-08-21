@@ -1,6 +1,9 @@
 {
+  "block.wirelessutils.directional_charger": "Directional Charger",
   "item.wirelessutils.ender_coil": "Ender Coil",
   "item.wirelessutils.glasses": "Work Glasses",
   "item.wirelessutils.void_pearl": "Void Pearl",
-  "itemGroup.wirelessutils": "Wireless Utilities"
+  "itemGroup.wirelessutils": "Wireless Utilities",
+  "wirelessutils.info.tiered.creative": "(Tier Creative)",
+  "wirelessutils.info.tiered.tier": "(Tier %s)"
 }
