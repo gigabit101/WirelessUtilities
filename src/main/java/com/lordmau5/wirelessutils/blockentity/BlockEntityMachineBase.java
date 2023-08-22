@@ -2,6 +2,7 @@ package com.lordmau5.wirelessutils.blockentity;
 
 import com.lordmau5.wirelessutils.blocks.base.BlockMachineBase;
 import com.lordmau5.wirelessutils.lib.MachineLevel;
+import com.lordmau5.wirelessutils.lib.block.ISidedMachine;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
@@ -17,7 +18,7 @@ import net.minecraftforge.client.model.data.ModelData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class BlockEntityMachineBase extends BlockEntity {
+public abstract class BlockEntityMachineBase extends BlockEntity implements ISidedMachine {
     private MachineLevel machineLevel = MachineLevel.getMinLevel();
 
     public BlockEntityMachineBase(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
@@ -48,6 +49,7 @@ public abstract class BlockEntityMachineBase extends BlockEntity {
         super.saveAdditional(tag);
 
         tag.putInt("machineLevel", getMachineLevel().ordinal());
+        saveSidedIONBT(tag);
     }
 
     @Override
@@ -57,6 +59,8 @@ public abstract class BlockEntityMachineBase extends BlockEntity {
         if (tag.contains("machineLevel", Tag.TAG_INT)) {
             machineLevel = MachineLevel.fromInt(tag.getInt("machineLevel"));
         }
+
+        loadSidedIONBT(tag);
     }
 
     @Override

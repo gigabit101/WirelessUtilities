@@ -6,6 +6,7 @@ import com.lordmau5.wirelessutils.lib.MachineLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
@@ -91,10 +92,14 @@ public class BlockMachineBase extends Block implements EntityBlock
         if (pLevel.isClientSide) return;
 
         CompoundTag tag = pStack.getOrCreateTag();
-        if (!tag.contains("machineLevel")) return;
+        if (tag.contains("machineLevel")) {
+            MachineLevel level = MachineLevel.fromInt(tag.getInt("machineLevel"));
+            machineBase.setMachineLevel(level);
+        }
 
-        MachineLevel level = MachineLevel.fromInt(tag.getInt("machineLevel"));
-        machineBase.setMachineLevel(level);
+        if (tag.contains("sidedIO", Tag.TAG_COMPOUND)) {
+            machineBase.loadSidedIONBT(tag.getCompound("sidedIO"));
+        }
     }
 
     @Override
@@ -103,7 +108,10 @@ public class BlockMachineBase extends Block implements EntityBlock
 
         BlockEntity be = level.getBlockEntity(pos);
         if (be instanceof BlockEntityMachineBase machineBase) {
-            stack.getOrCreateTag().putInt("machineLevel", machineBase.getMachineLevel().ordinal());
+            CompoundTag tag = stack.getOrCreateTag();
+
+            tag.putInt("machineLevel", machineBase.getMachineLevel().ordinal());
+            machineBase.saveSidedIONBT(tag);
         }
 
         return stack;
