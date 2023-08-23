@@ -1,9 +1,13 @@
 package com.lordmau5.wirelessutils.blockentity;
 
 import com.lordmau5.wirelessutils.blocks.base.BlockMachineBase;
+import com.lordmau5.wirelessutils.client.IOIndicatorLoader;
 import com.lordmau5.wirelessutils.lib.MachineLevel;
+import com.lordmau5.wirelessutils.lib.block.IFacingBlock;
 import com.lordmau5.wirelessutils.lib.block.ISidedMachine;
+import com.lordmau5.wirelessutils.lib.block.SidedIO;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.Connection;
@@ -18,11 +22,18 @@ import net.minecraftforge.client.model.data.ModelData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class BlockEntityMachineBase extends BlockEntity implements ISidedMachine {
+public abstract class BlockEntityMachineBase extends BlockEntity implements ISidedMachine, IFacingBlock {
     private MachineLevel machineLevel = MachineLevel.getMinLevel();
+
+    private final SidedIO sidedIO = new SidedIO();
 
     public BlockEntityMachineBase(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
         super(pType, pPos, pBlockState);
+    }
+
+    @Override
+    public SidedIO getSidedIO() {
+        return sidedIO;
     }
 
     private void updateBlock() {
@@ -67,7 +78,7 @@ public abstract class BlockEntityMachineBase extends BlockEntity implements ISid
     public @NotNull CompoundTag getUpdateTag() {
         CompoundTag tag = super.getUpdateTag();
 
-        tag.putInt("machineLevel", getMachineLevel().ordinal());
+        saveAdditional(tag);
 
         return tag;
     }
@@ -83,10 +94,47 @@ public abstract class BlockEntityMachineBase extends BlockEntity implements ISid
         super.onDataPacket(net, pkt);
 
         updateBlock();
+        requestModelDataUpdate();
     }
 
     @Override
     public @NotNull ModelData getModelData() {
-        return super.getModelData();
+        ModelData.Builder builder = ModelData.builder();
+
+        builder.with(IOIndicatorLoader.IOIndicatorModel.PROPERTY, sidedIO.getStates(this::isSideValid));
+
+        return builder.build();
+    }
+
+    @Override
+    public Direction getFacing() {
+        return getBlockState().getValue(BlockMachineBase.FACING).direction;
+    }
+
+    public void shuffleStates() {
+        for (Direction dir : Direction.values()) {
+            if (dir == getFacing()) {
+                sidedIO.setState(dir, SidedIO.SidedIOStates.NONE);
+                continue;
+            }
+
+            sidedIO.setState(dir, SidedIO.SidedIOStates.values()[level.random.nextInt(4)]);
+        }
+
+        updateBlock();
+    }
+
+    public void advanceIOOnSide(Direction side) {
+        if (!isSideValid(side)) return;
+
+        SidedIO.SidedIOStates state = getSidedIO().getState(side);
+
+        int nextState = state.ordinal() + 1;
+        if (nextState >= SidedIO.SidedIOStates.values().length)
+            nextState = 0;
+
+        getSidedIO().setState(side, SidedIO.SidedIOStates.values()[nextState]);
+
+        updateBlock();
     }
 }

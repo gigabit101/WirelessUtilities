@@ -1,6 +1,5 @@
 package com.lordmau5.wirelessutils.lib;
 
-import com.lordmau5.wirelessutils.init.ModBlocks;
 import com.lordmau5.wirelessutils.init.ModItems;
 import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.nbt.CompoundTag;

@@ -1,7 +1,6 @@
 package com.lordmau5.wirelessutils.lib;
 
 import com.lordmau5.wirelessutils.blockentity.BlockEntityMachineBase;
-import com.lordmau5.wirelessutils.blocks.base.BlockMachineBase;
 import com.lordmau5.wirelessutils.init.ModBlocks;
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.core.BlockPos;

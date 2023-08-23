@@ -4,28 +4,26 @@ import com.lordmau5.wirelessutils.blockentity.BlockEntityMachineBase;
 import com.lordmau5.wirelessutils.lib.DirectionRotatable;
 import com.lordmau5.wirelessutils.lib.MachineLevel;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.*;
-import net.minecraft.world.level.gameevent.GameEventListener;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.Nullable;
@@ -67,7 +65,9 @@ public class BlockMachineBase extends Block implements EntityBlock
                 nextLevel = 0;
             }
 
-            machineBase.setMachineLevel(MachineLevel.fromInt(nextLevel));
+//            machineBase.setMachineLevel(MachineLevel.fromInt(nextLevel));
+//            machineBase.shuffleStates();
+            machineBase.advanceIOOnSide(pHit.getDirection());
         }
 
         return super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
@@ -117,7 +117,12 @@ public class BlockMachineBase extends Block implements EntityBlock
         return stack;
     }
 
-//        @Override
+    @Override
+    public BlockState rotate(BlockState pState, Rotation pRotation) {
+        return super.rotate(pState, pRotation);
+    }
+
+    //        @Override
 //    public BlockState rotate(BlockState pState, Rotation pRot) {
 //        return pState.setValue(FACING, pRot.rotate(pState.getValue(FACING)));
 //    }

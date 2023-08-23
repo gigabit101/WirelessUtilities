@@ -320,6 +320,11 @@
       "apply": {
         "model": "wirelessutils:block/machine_level_overlay"
       }
+    },
+    {
+      "apply": {
+        "model": "wirelessutils:block/machine_io_overlay"
+      }
     }
   ]
 }

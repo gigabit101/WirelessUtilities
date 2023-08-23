@@ -1,7 +1,6 @@
 package com.lordmau5.wirelessutils.init;
 
 import com.lordmau5.wirelessutils.blocks.BlockAngledSlime;
-import com.lordmau5.wirelessutils.blocks.base.BlockMachineBase;
 import com.lordmau5.wirelessutils.blocks.charger.BlockDirectionalCharger;
 import com.lordmau5.wirelessutils.blocks.charger.BlockPositionalCharger;
 import com.lordmau5.wirelessutils.blocks.condenser.BlockDirectionalCondenser;
@@ -9,11 +8,8 @@ import com.lordmau5.wirelessutils.blocks.condenser.BlockPositionalCondenser;
 import com.lordmau5.wirelessutils.blocks.desublimator.BlockDirectionalDesublimator;
 import com.lordmau5.wirelessutils.blocks.desublimator.BlockPositionalDesublimator;
 import com.lordmau5.wirelessutils.lib.ModInfo;
-import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;

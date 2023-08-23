@@ -1,0 +1,8 @@
+{
+  "loader": "wirelessutils:io_indicator",
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "forge:white"
+  },
+  "render_type": "minecraft:cutout"
+}

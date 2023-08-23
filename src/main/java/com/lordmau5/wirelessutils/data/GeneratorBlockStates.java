@@ -19,6 +19,8 @@ public class GeneratorBlockStates extends BlockStateProvider {
     private BlockModelBuilder POSITIONAL_MACHINE_BASE;
     private BlockModelBuilder LEVEL_OVERLAY;
 
+    private BlockModelBuilder IO_OVERLAY;
+
     private BlockModelBuilder MARK_DIRECTIONAL;
     private BlockModelBuilder MARK_POSITIONAL;
 
@@ -75,6 +77,16 @@ public class GeneratorBlockStates extends BlockStateProvider {
                     .faces((dir, builder) -> builder.tintindex(2))
                 .end()
                 .renderType("cutout");
+
+        IO_OVERLAY = models().withExistingParent("block/machine_io_overlay", "wirelessutils:io_indicator");
+
+//        IO_OVERLAY = models().withExistingParent("block/machine_level_overlay", "block/cube")
+//                .texture("texture", modLoc("block/overlay"))
+//                .element()
+//                .cube("#texture")
+//                .faces((dir, builder) -> builder.tintindex(2))
+//                .end()
+//                .renderType("cutout");
     }
 
     private void registerDirectionalMachines() {
@@ -139,6 +151,7 @@ public class GeneratorBlockStates extends BlockStateProvider {
         }
 
         builder.part().modelFile(LEVEL_OVERLAY).addModel();
+        builder.part().modelFile(IO_OVERLAY).addModel();
 
         models()
                 .withExistingParent("block/directional_" + type, "minecraft:block/cube_all")
@@ -214,6 +227,7 @@ public class GeneratorBlockStates extends BlockStateProvider {
         }
 
         builder.part().modelFile(LEVEL_OVERLAY).addModel();
+        builder.part().modelFile(IO_OVERLAY).addModel();
 
         models()
                 .withExistingParent("block/positional_" + type, "minecraft:block/cube_all")
