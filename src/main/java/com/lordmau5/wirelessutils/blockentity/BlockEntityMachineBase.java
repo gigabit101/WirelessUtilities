@@ -43,6 +43,8 @@ public abstract class BlockEntityMachineBase extends BlockEntity implements ISid
                 getBlockState(),
                 Block.UPDATE_ALL
         );
+
+        setChanged();
     }
 
     public MachineLevel getMachineLevel() {
@@ -108,32 +110,34 @@ public abstract class BlockEntityMachineBase extends BlockEntity implements ISid
 
     @Override
     public Direction getFacing() {
-        return getBlockState().getValue(BlockMachineBase.FACING).direction;
+        return getBlockState().getValue(BlockMachineBase.FACING);
     }
 
     public void shuffleStates() {
-        for (Direction dir : Direction.values()) {
-            if (dir == getFacing()) {
-                sidedIO.setState(dir, SidedIO.SidedIOStates.NONE);
+        for (SidedIO.SidedIOFace face : SidedIO.SidedIOFace.values()) {
+            if (face == SidedIO.SidedIOFace.FRONT) {
+                sidedIO.setState(face, SidedIO.SidedIOState.NONE);
                 continue;
             }
 
-            sidedIO.setState(dir, SidedIO.SidedIOStates.values()[level.random.nextInt(4)]);
+            sidedIO.setState(face, SidedIO.SidedIOState.values()[level.random.nextInt(4)]);
         }
 
         updateBlock();
     }
 
     public void advanceIOOnSide(Direction side) {
-        if (!isSideValid(side)) return;
+        SidedIO.SidedIOFace face = getIOBasedOnFacing(side);
 
-        SidedIO.SidedIOStates state = getSidedIO().getState(side);
+        if (!isSideValid(face)) return;
+
+        SidedIO.SidedIOState state = getSidedIO().getState(face);
 
         int nextState = state.ordinal() + 1;
-        if (nextState >= SidedIO.SidedIOStates.values().length)
+        if (nextState >= SidedIO.SidedIOState.values().length)
             nextState = 0;
 
-        getSidedIO().setState(side, SidedIO.SidedIOStates.values()[nextState]);
+        getSidedIO().setState(face, SidedIO.SidedIOState.values()[nextState]);
 
         updateBlock();
     }

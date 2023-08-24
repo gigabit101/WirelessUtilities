@@ -1,9 +1,9 @@
 package com.lordmau5.wirelessutils.blocks.base;
 
 import com.lordmau5.wirelessutils.blockentity.BlockEntityMachineBase;
-import com.lordmau5.wirelessutils.lib.DirectionRotatable;
 import com.lordmau5.wirelessutils.lib.MachineLevel;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.world.InteractionHand;
@@ -11,11 +11,13 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -23,30 +25,31 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.Nullable;
 
 public class BlockMachineBase extends Block implements EntityBlock
 {
-    public static final EnumProperty<DirectionRotatable> FACING = EnumProperty.create("facing", DirectionRotatable.class);
+//    public static final EnumProperty<DirectionRotatable> FACING = EnumProperty.create("facing", DirectionRotatable.class);
+    public static final DirectionProperty FACING = DirectionProperty.create("facing");
     public static final BooleanProperty ACTIVE = BooleanProperty.create("active");
 
     public BlockMachineBase(Properties properties)
     {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, DirectionRotatable.NORTH).setValue(ACTIVE, false));
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(ACTIVE, false));
     }
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext blockPlaceContext)
     {
-        DirectionRotatable direction = DirectionRotatable.fromFacing(
-                blockPlaceContext.getNearestLookingDirection().getOpposite(),
-                blockPlaceContext.getHorizontalDirection().getAxis().ordinal() != 0
-        );
-        return this.defaultBlockState().setValue(FACING, direction);
+//        DirectionRotatable direction = DirectionRotatable.fromFacing(
+//                blockPlaceContext.getNearestLookingDirection().getOpposite(),
+//                blockPlaceContext.getHorizontalDirection().getAxis().ordinal() != 0
+//        );
+        return this.defaultBlockState().setValue(FACING, blockPlaceContext.getNearestLookingDirection().getOpposite());
     }
 
     @Override
@@ -59,15 +62,15 @@ public class BlockMachineBase extends Block implements EntityBlock
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         BlockEntity entity = pLevel.getBlockEntity(pPos);
         if (!pLevel.isClientSide && pHand == InteractionHand.MAIN_HAND && entity instanceof BlockEntityMachineBase machineBase) {
-            MachineLevel machineLevel = machineBase.getMachineLevel();
-            int nextLevel = machineLevel.ordinal() + 1;
-            if (nextLevel > MachineLevel.getMaxLevel().ordinal()) {
-                nextLevel = 0;
-            }
+            ItemStack heldItem = pPlayer.getItemInHand(pHand);
+            if (heldItem.is(Items.STICK)) {
+                BlockState newState = rotate(pState, Rotation.CLOCKWISE_90);
 
-//            machineBase.setMachineLevel(MachineLevel.fromInt(nextLevel));
-//            machineBase.shuffleStates();
-            machineBase.advanceIOOnSide(pHit.getDirection());
+                pLevel.setBlockAndUpdate(pPos, newState);
+            }
+            else {
+                machineBase.advanceIOOnSide(pHit.getDirection());
+            }
         }
 
         return super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
@@ -117,18 +120,15 @@ public class BlockMachineBase extends Block implements EntityBlock
         return stack;
     }
 
+    // TODO: This doesn't allow up or down rotation
     @Override
-    public BlockState rotate(BlockState pState, Rotation pRotation) {
-        return super.rotate(pState, pRotation);
+    public BlockState rotate(BlockState state, Rotation rotation) {
+        return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
     }
 
-    //        @Override
-//    public BlockState rotate(BlockState pState, Rotation pRot) {
-//        return pState.setValue(FACING, pRot.rotate(pState.getValue(FACING)));
-//    }
-//
-//    @Override
-//    public BlockState mirror(BlockState pState, Mirror pMirror) {
-//        return pState.rotate(pMirror.getRotation(pState.getValue(FACING)));
-//    }
+    // TODO: This doesn't actually mirror the I/O - it acts as a 180° rotation for now
+    @Override
+    public BlockState mirror(BlockState state, Mirror mirror) {
+        return state.setValue(FACING, mirror.mirror(state.getValue(FACING)));
+    }
 }

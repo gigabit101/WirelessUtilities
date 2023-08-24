@@ -7,7 +7,7 @@
         "y": 270
       },
       "when": {
-        "facing": "down_z"
+        "facing": "down"
       }
     },
     {
@@ -18,7 +18,7 @@
       },
       "when": {
         "active": "true",
-        "facing": "down_z"
+        "facing": "down"
       }
     },
     {
@@ -28,7 +28,7 @@
         "y": 270
       },
       "when": {
-        "facing": "up_z"
+        "facing": "up"
       }
     },
     {
@@ -39,7 +39,7 @@
       },
       "when": {
         "active": "true",
-        "facing": "up_z"
+        "facing": "up"
       }
     },
     {
@@ -120,52 +120,10 @@
       "apply": {
         "model": "wirelessutils:block/directional_machine_base",
         "x": 90,
-        "y": 360
-      },
-      "when": {
-        "facing": "down_x"
-      }
-    },
-    {
-      "apply": {
-        "model": "wirelessutils:block/directional_charger_mark_active",
-        "x": 90,
-        "y": 360
-      },
-      "when": {
-        "active": "true",
-        "facing": "down_x"
-      }
-    },
-    {
-      "apply": {
-        "model": "wirelessutils:block/directional_machine_base",
-        "x": -90,
-        "y": 360
-      },
-      "when": {
-        "facing": "up_x"
-      }
-    },
-    {
-      "apply": {
-        "model": "wirelessutils:block/directional_charger_mark_active",
-        "x": -90,
-        "y": 360
-      },
-      "when": {
-        "active": "true",
-        "facing": "up_x"
-      }
-    },
-    {
-      "apply": {
-        "model": "wirelessutils:block/directional_machine_base",
-        "x": 90,
         "y": 270
       },
       "when": {
-        "facing": "down_z"
+        "facing": "down"
       }
     },
     {
@@ -176,7 +134,7 @@
       },
       "when": {
         "active": "false",
-        "facing": "down_z"
+        "facing": "down"
       }
     },
     {
@@ -186,7 +144,7 @@
         "y": 270
       },
       "when": {
-        "facing": "up_z"
+        "facing": "up"
       }
     },
     {
@@ -197,7 +155,7 @@
       },
       "when": {
         "active": "false",
-        "facing": "up_z"
+        "facing": "up"
       }
     },
     {
@@ -272,48 +230,6 @@
       "when": {
         "active": "false",
         "facing": "east"
-      }
-    },
-    {
-      "apply": {
-        "model": "wirelessutils:block/directional_machine_base",
-        "x": 90,
-        "y": 360
-      },
-      "when": {
-        "facing": "down_x"
-      }
-    },
-    {
-      "apply": {
-        "model": "wirelessutils:block/directional_charger_mark",
-        "x": 90,
-        "y": 360
-      },
-      "when": {
-        "active": "false",
-        "facing": "down_x"
-      }
-    },
-    {
-      "apply": {
-        "model": "wirelessutils:block/directional_machine_base",
-        "x": -90,
-        "y": 360
-      },
-      "when": {
-        "facing": "up_x"
-      }
-    },
-    {
-      "apply": {
-        "model": "wirelessutils:block/directional_charger_mark",
-        "x": -90,
-        "y": 360
-      },
-      "when": {
-        "active": "false",
-        "facing": "up_x"
       }
     },
     {

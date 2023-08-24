@@ -1,6 +1,5 @@
 package com.lordmau5.wirelessutils.blocks.base;
 
-import com.lordmau5.wirelessutils.lib.DirectionRotatable;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -14,11 +13,11 @@ public class BlockPositionalMachineBase extends BlockMachineBase
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext blockPlaceContext)
     {
-        DirectionRotatable direction = DirectionRotatable.fromFacing(
-                blockPlaceContext.getHorizontalDirection().getOpposite(),
-                false
-        );
-        return this.defaultBlockState().setValue(FACING, direction);
+//        DirectionRotatable direction = DirectionRotatable.fromFacing(
+//                blockPlaceContext.getHorizontalDirection().getOpposite(),
+//                false
+//        );
+        return this.defaultBlockState().setValue(FACING, blockPlaceContext.getHorizontalDirection().getOpposite());
     }
 
 //    @Override

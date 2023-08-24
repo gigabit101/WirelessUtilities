@@ -2,7 +2,6 @@ package com.lordmau5.wirelessutils.data;
 
 import com.lordmau5.wirelessutils.blocks.base.BlockMachineBase;
 import com.lordmau5.wirelessutils.init.ModBlocks;
-import com.lordmau5.wirelessutils.lib.DirectionRotatable;
 import com.lordmau5.wirelessutils.lib.ModInfo;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
@@ -132,18 +131,18 @@ public class GeneratorBlockStates extends BlockStateProvider {
         for (int i = 0; i < 2; i++) {
             boolean isActive = i == 0;
 
-            for (DirectionRotatable dir : DirectionRotatable.values()) {
+            for (Direction dir : Direction.values()) {
                 // Base textures
                 builder.part().modelFile(DIRECTIONAL_MACHINE_BASE)
-                        .rotationX(getRotationX(dir.direction))
-                        .rotationY((int) dir.getOpposite().direction.toYRot() + (dir.rotation_x ? 90 : 0))
+                        .rotationX(getRotationX(dir))
+                        .rotationY((int) dir.getOpposite().toYRot()) // + (dir.rotation_x ? 90 : 0))
                         .addModel()
                         .condition(BlockMachineBase.FACING, dir);
 
                 // Mark
                 builder.part().modelFile(models[i])
-                        .rotationX(getRotationX(dir.direction))
-                        .rotationY((int) dir.getOpposite().direction.toYRot() + (dir.rotation_x ? 90 : 0))
+                        .rotationX(getRotationX(dir))
+                        .rotationY((int) dir.getOpposite().toYRot()) //+ (dir.rotation_x ? 90 : 0))
                         .addModel()
                         .condition(BlockMachineBase.FACING, dir)
                         .condition(BlockMachineBase.ACTIVE, isActive);
@@ -209,17 +208,17 @@ public class GeneratorBlockStates extends BlockStateProvider {
         for (int i = 0; i < 2; i++) {
             boolean isActive = i == 0;
 
-            for (DirectionRotatable dir : DirectionRotatable.values()) {
+            for (Direction dir : Direction.values()) {
                 // Base textures
                 builder.part().modelFile(POSITIONAL_MACHINE_BASE)
-                        .rotationY((int) dir.getOpposite().direction.toYRot())
+                        .rotationY((int) dir.getOpposite().toYRot())
                         .addModel()
                         .condition(BlockMachineBase.FACING, dir)
                         .condition(BlockMachineBase.ACTIVE, isActive);
 
                 // Mark
                 builder.part().modelFile(models[i])
-                        .rotationY((int) dir.getOpposite().direction.toYRot())
+                        .rotationY((int) dir.getOpposite().toYRot())
                         .addModel()
                         .condition(BlockMachineBase.FACING, dir)
                         .condition(BlockMachineBase.ACTIVE, isActive);

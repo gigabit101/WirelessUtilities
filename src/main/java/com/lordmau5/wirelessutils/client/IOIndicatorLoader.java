@@ -3,8 +3,10 @@ package com.lordmau5.wirelessutils.client;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+import com.lordmau5.wirelessutils.blocks.base.BlockMachineBase;
 import com.lordmau5.wirelessutils.lib.ModInfo;
-import com.lordmau5.wirelessutils.lib.block.SidedIO.SidedIOStates;
+import com.lordmau5.wirelessutils.lib.block.SidedIO;
+import com.lordmau5.wirelessutils.lib.block.SidedIO.SidedIOState;
 import net.minecraft.Util;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.model.BakedQuad;
@@ -60,9 +62,9 @@ public final class IOIndicatorLoader implements IGeometryLoader<IOIndicatorLoade
         private static final ResourceLocation IO_TEX_BASE_PATH = new ResourceLocation(ModInfo.MODID, "block/io/");
         @SuppressWarnings("deprecation")
         private static final Material MISSING_TEX_MATERIAL = new Material(TextureAtlas.LOCATION_BLOCKS, MissingTextureAtlasSprite.getLocation());
-        private static final Map<SidedIOStates, Material> IO_TEX_MATERIALS = Util.make(new EnumMap<>(SidedIOStates.class), map ->
+        private static final Map<SidedIOState, Material> IO_TEX_MATERIALS = Util.make(new EnumMap<>(SidedIOState.class), map ->
         {
-            for (SidedIOStates state : SidedIOStates.values())
+            for (SidedIOState state : SidedIOState.values())
             {
                 //noinspection deprecation
                 map.put(state, new Material(TextureAtlas.LOCATION_BLOCKS, IO_TEX_BASE_PATH.withSuffix(state.getName())));
@@ -72,8 +74,8 @@ public final class IOIndicatorLoader implements IGeometryLoader<IOIndicatorLoade
         @Override
         public BakedModel bake(IGeometryBakingContext ctx, ModelBaker baker, Function<Material, TextureAtlasSprite> spriteGetter, ModelState modelState, ItemOverrides overrides, ResourceLocation modelLocation)
         {
-            Map<SidedIOStates, BakedModel> ioModels = new EnumMap<>(SidedIOStates.class);
-            for (SidedIOStates state : SidedIOStates.values())
+            Map<SidedIOState, BakedModel> ioModels = new EnumMap<>(SidedIOState.class);
+            for (SidedIOState state : SidedIOState.values())
             {
                 TextureAtlasSprite stateSprite = spriteGetter.apply(IO_TEX_MATERIALS.get(state));
                 Function<Material, TextureAtlasSprite> stateSpriteGetter = mat ->
@@ -100,13 +102,13 @@ public final class IOIndicatorLoader implements IGeometryLoader<IOIndicatorLoade
 
     public static final class IOIndicatorModel extends BakedModelWrapper<BakedModel>
     {
-        public static final ModelProperty<Map<Direction, SidedIOStates>> PROPERTY = new ModelProperty<>();
+        public static final ModelProperty<Map<SidedIO.SidedIOFace, SidedIOState>> PROPERTY = new ModelProperty<>();
 
-        private final Map<SidedIOStates, BakedModel> ioModels;
+        private final Map<SidedIOState, BakedModel> ioModels;
 
-        public IOIndicatorModel(Map<SidedIOStates, BakedModel> ioModels)
+        public IOIndicatorModel(Map<SidedIOState, BakedModel> ioModels)
         {
-            super(ioModels.get(SidedIOStates.NONE));
+            super(ioModels.get(SidedIOState.NONE));
             this.ioModels = ioModels;
         }
 
@@ -115,12 +117,14 @@ public final class IOIndicatorLoader implements IGeometryLoader<IOIndicatorLoade
         {
             if (side != null)
             {
-                Map<Direction, SidedIOStates> states = extraData.get(PROPERTY);
+                Map<SidedIO.SidedIOFace, SidedIOState> states = extraData.get(PROPERTY);
                 if (states != null)
                 {
-                    SidedIOStates ioState = states.get(side);
+                    Direction facing = state.getValue(BlockMachineBase.FACING);
+
+                    SidedIOState ioState = states.get(SidedIO.getIOBasedOnFacing(facing ,side));
                     BakedModel model = ioModels.get(ioState);
-                    if (ioState == SidedIOStates.NONE || model == null) {
+                    if (ioState == SidedIOState.NONE || model == null) {
                         return List.of();
                     }
 
