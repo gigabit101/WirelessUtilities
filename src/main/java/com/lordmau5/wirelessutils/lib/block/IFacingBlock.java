@@ -1,15 +1,20 @@
 package com.lordmau5.wirelessutils.lib.block;
 
 import net.minecraft.core.Direction;
+import net.minecraft.world.level.block.Rotation;
 
 public interface IFacingBlock {
     Direction getFacing();
 
-    default Direction getSideBasedOnFacing(Direction side) {
-        return SidedIO.OUTPUT_TABLE[getFacing().ordinal()][side.ordinal()];
+    default Rotation getRotation() {
+        return Rotation.NONE;
     }
 
-    default SidedIO.SidedIOFace getIOBasedOnFacing(Direction side) {
-        return SidedIO.SidedIOFace.values()[getSideBasedOnFacing(side).ordinal()];
+    default Direction getSideBasedOnFacing(Direction side) {
+        return SidedIO.getDirectionTable()[getFacing().ordinal()][side.ordinal()];
+    }
+
+    default boolean canRotateAroundAxis(Direction.Axis axis) {
+        return true;
     }
 }

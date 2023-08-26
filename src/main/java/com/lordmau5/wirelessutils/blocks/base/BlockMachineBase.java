@@ -1,6 +1,8 @@
 package com.lordmau5.wirelessutils.blocks.base;
 
 import com.lordmau5.wirelessutils.blockentity.BlockEntityMachineBase;
+import com.lordmau5.wirelessutils.lib.DirectionRotatable;
+import com.lordmau5.wirelessutils.lib.DirectionRotationHelper;
 import com.lordmau5.wirelessutils.lib.MachineLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -26,36 +28,45 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.Nullable;
 
 public class BlockMachineBase extends Block implements EntityBlock
 {
-//    public static final EnumProperty<DirectionRotatable> FACING = EnumProperty.create("facing", DirectionRotatable.class);
-    public static final DirectionProperty FACING = DirectionProperty.create("facing");
+    public static final EnumProperty<DirectionRotatable> FACING = EnumProperty.create("facing", DirectionRotatable.class);
+    public static final EnumProperty<Rotation> ROTATION = EnumProperty.create("rotation", Rotation.class);
     public static final BooleanProperty ACTIVE = BooleanProperty.create("active");
 
     public BlockMachineBase(Properties properties)
     {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(ACTIVE, false));
+        this.registerDefaultState(
+                this.stateDefinition.any()
+                        .setValue(FACING, DirectionRotatable.NORTH)
+                        .setValue(ROTATION, Rotation.NONE)
+                        .setValue(ACTIVE, false)
+        );
     }
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext blockPlaceContext)
     {
-//        DirectionRotatable direction = DirectionRotatable.fromFacing(
-//                blockPlaceContext.getNearestLookingDirection().getOpposite(),
-//                blockPlaceContext.getHorizontalDirection().getAxis().ordinal() != 0
-//        );
-        return this.defaultBlockState().setValue(FACING, blockPlaceContext.getNearestLookingDirection().getOpposite());
+        DirectionRotatable direction = DirectionRotatable.fromDirection(
+            blockPlaceContext.getNearestLookingDirection().getOpposite()
+        );
+        Rotation rotation = DirectionRotationHelper.getRotationBasedOnYFacing(direction.direction, blockPlaceContext.getRotation());
+
+        return this.defaultBlockState()
+                .setValue(FACING, direction)
+                .setValue(ROTATION, rotation);
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder)
     {
-        builder.add(FACING, ACTIVE);
+        builder.add(FACING, ROTATION, ACTIVE);
     }
 
     @Override
@@ -63,12 +74,23 @@ public class BlockMachineBase extends Block implements EntityBlock
         BlockEntity entity = pLevel.getBlockEntity(pPos);
         if (!pLevel.isClientSide && pHand == InteractionHand.MAIN_HAND && entity instanceof BlockEntityMachineBase machineBase) {
             ItemStack heldItem = pPlayer.getItemInHand(pHand);
-            if (heldItem.is(Items.STICK)) {
-                BlockState newState = rotate(pState, Rotation.CLOCKWISE_90);
+            // TODO: Replace this with a wrench icon
+            if (heldItem.is(Items.NAME_TAG)) {
+                Direction.Axis axis = pHit.getDirection().getAxis();
 
-                pLevel.setBlockAndUpdate(pPos, newState);
+                DirectionRotatable oldFacing = pState.getValue(FACING);
+                DirectionRotatable newFacing = oldFacing;
+
+                Rotation rotation = pState.getValue(ROTATION);
+                if (machineBase.canRotateAroundAxis(axis)) {
+                    newFacing = newFacing.rotateAround(axis);
+                    rotation = DirectionRotationHelper.getRotationBasedOnPreviousAndNewFacing(oldFacing.direction, newFacing.direction, rotation);
+                }
+
+                pLevel.setBlockAndUpdate(pPos, pState.setValue(FACING, newFacing).setValue(ROTATION, rotation));
             }
             else {
+                // TODO: Do this in the machine and maybe a custom item, too?
                 machineBase.advanceIOOnSide(pHit.getDirection());
             }
         }
@@ -120,15 +142,29 @@ public class BlockMachineBase extends Block implements EntityBlock
         return stack;
     }
 
-    // TODO: This doesn't allow up or down rotation
+    // Used for structure generation and mods like Building Gadgets or similar that can rotate blocks
     @Override
     public BlockState rotate(BlockState state, Rotation rotation) {
-        return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
+        DirectionRotatable direction = state.getValue(FACING);
+        Rotation rotationState = state.getValue(ROTATION);
+
+//        DirectionRotatable rotatedDirection = DirectionRotatable.fromDirection(
+//            rotation.rotate(state.getValue(FACING).direction)
+//        );
+
+        return state.setValue(FACING, direction).setValue(ROTATION, rotationState);
     }
 
-    // TODO: This doesn't actually mirror the I/O - it acts as a 180° rotation for now
+    // Used for structure generation and mods like Building Gadgets or similar that can mirror blocks
     @Override
     public BlockState mirror(BlockState state, Mirror mirror) {
-        return state.setValue(FACING, mirror.mirror(state.getValue(FACING)));
+        DirectionRotatable direction = state.getValue(FACING);
+        Rotation rotationState = state.getValue(ROTATION);
+
+//        DirectionRotatable mirroredDirection = DirectionRotatable.fromDirection(
+////                mirror.mirror(state.getValue(FACING).direction)
+////        );
+
+        return state.setValue(FACING, direction).setValue(ROTATION, rotationState);
     }
 }

@@ -18,7 +18,7 @@ public class ModBlocks
 {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, ModInfo.MODID);
 
-    public static final RegistryObject<Block> ANGLED_SLIME = BLOCKS.register("angled_slime", () -> new BlockAngledSlime(BlockBehaviour.Properties.of()));
+//    public static final RegistryObject<Block> ANGLED_SLIME = BLOCKS.register("angled_slime", () -> new BlockAngledSlime(BlockBehaviour.Properties.of()));
 
     public static final RegistryObject<Block> DIRECTIONAL_CHARGER = BLOCKS.register("directional_charger", () -> new BlockDirectionalCharger(BlockBehaviour.Properties.of()));
     public static final RegistryObject<Block> DIRECTIONAL_CONDENSER = BLOCKS.register("directional_condenser", () -> new BlockDirectionalCondenser(BlockBehaviour.Properties.of()));

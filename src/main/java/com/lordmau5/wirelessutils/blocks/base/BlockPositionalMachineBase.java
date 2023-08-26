@@ -9,24 +9,4 @@ public class BlockPositionalMachineBase extends BlockMachineBase
     {
         super(properties);
     }
-
-    @Override
-    public BlockState getStateForPlacement(BlockPlaceContext blockPlaceContext)
-    {
-//        DirectionRotatable direction = DirectionRotatable.fromFacing(
-//                blockPlaceContext.getHorizontalDirection().getOpposite(),
-//                false
-//        );
-        return this.defaultBlockState().setValue(FACING, blockPlaceContext.getHorizontalDirection().getOpposite());
-    }
-
-//    @Override
-//    public BlockState rotate(BlockState pState, Rotation pRot) {
-//        return pState.setValue(FACING, pRot.rotate(pState.getValue(FACING)));
-//    }
-//
-//    @Override
-//    public BlockState mirror(BlockState pState, Mirror pMirror) {
-//        return pState.rotate(pMirror.getRotation(pState.getValue(FACING)));
-//    }
 }

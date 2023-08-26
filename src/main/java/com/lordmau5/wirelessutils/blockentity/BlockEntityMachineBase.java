@@ -2,6 +2,8 @@ package com.lordmau5.wirelessutils.blockentity;
 
 import com.lordmau5.wirelessutils.blocks.base.BlockMachineBase;
 import com.lordmau5.wirelessutils.client.IOIndicatorLoader;
+import com.lordmau5.wirelessutils.lib.DirectionRotatable;
+import com.lordmau5.wirelessutils.lib.DirectionRotationHelper;
 import com.lordmau5.wirelessutils.lib.MachineLevel;
 import com.lordmau5.wirelessutils.lib.block.IFacingBlock;
 import com.lordmau5.wirelessutils.lib.block.ISidedMachine;
@@ -15,6 +17,7 @@ import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -110,7 +113,7 @@ public abstract class BlockEntityMachineBase extends BlockEntity implements ISid
 
     @Override
     public Direction getFacing() {
-        return getBlockState().getValue(BlockMachineBase.FACING);
+        return getBlockState().getValue(BlockMachineBase.FACING).direction;
     }
 
     public void shuffleStates() {
@@ -127,7 +130,9 @@ public abstract class BlockEntityMachineBase extends BlockEntity implements ISid
     }
 
     public void advanceIOOnSide(Direction side) {
-        SidedIO.SidedIOFace face = getIOBasedOnFacing(side);
+        DirectionRotatable facing = getBlockState().getValue(BlockMachineBase.FACING);
+        Rotation rotation = getBlockState().getValue(BlockMachineBase.ROTATION);
+        SidedIO.SidedIOFace face = DirectionRotationHelper.getSide(facing.direction, rotation, side);
 
         if (!isSideValid(face)) return;
 

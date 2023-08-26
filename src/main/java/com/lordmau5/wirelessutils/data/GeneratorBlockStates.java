@@ -2,11 +2,13 @@ package com.lordmau5.wirelessutils.data;
 
 import com.lordmau5.wirelessutils.blocks.base.BlockMachineBase;
 import com.lordmau5.wirelessutils.init.ModBlocks;
+import com.lordmau5.wirelessutils.lib.DirectionRotatable;
 import com.lordmau5.wirelessutils.lib.ModInfo;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.client.model.generators.loaders.CompositeModelBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -17,6 +19,9 @@ public class GeneratorBlockStates extends BlockStateProvider {
     private BlockModelBuilder DIRECTIONAL_MACHINE_BASE;
     private BlockModelBuilder POSITIONAL_MACHINE_BASE;
     private BlockModelBuilder LEVEL_OVERLAY;
+    private BlockModelBuilder ROTATION_OVERLAY_HORIZONTAL;
+    private BlockModelBuilder ROTATION_OVERLAY_UP;
+    private BlockModelBuilder ROTATION_OVERLAY_DOWN;
 
     private BlockModelBuilder IO_OVERLAY;
 
@@ -77,15 +82,39 @@ public class GeneratorBlockStates extends BlockStateProvider {
                 .end()
                 .renderType("cutout");
 
-        IO_OVERLAY = models().withExistingParent("block/machine_io_overlay", "wirelessutils:io_indicator");
+        // TODO: Better model / file names
+        ROTATION_OVERLAY_HORIZONTAL = models()
+                .getBuilder("block/rotation_horizontal")
+                    .element()
+                        .face(Direction.EAST)
+                        .texture("#texture")
+                    .end()
+                .end()
+                .texture("texture", modLoc("block/top_rotation"))
+                .renderType("cutout");
 
-//        IO_OVERLAY = models().withExistingParent("block/machine_level_overlay", "block/cube")
-//                .texture("texture", modLoc("block/overlay"))
-//                .element()
-//                .cube("#texture")
-//                .faces((dir, builder) -> builder.tintindex(2))
-//                .end()
-//                .renderType("cutout");
+        ROTATION_OVERLAY_UP = models()
+                .getBuilder("block/rotation_up")
+                    .element()
+                        .face(Direction.UP)
+                        .texture("#texture")
+                    .end()
+                .end()
+                .texture("texture", modLoc("block/top_rotation"))
+                .renderType("cutout");
+
+        ROTATION_OVERLAY_DOWN = models()
+                .getBuilder("block/rotation_down")
+                    .element()
+                        .face(Direction.DOWN)
+                        .rotation(ModelBuilder.FaceRotation.UPSIDE_DOWN)
+                        .texture("#texture")
+                    .end()
+                .end()
+                .texture("texture", modLoc("block/top_rotation"))
+                .renderType("cutout");
+
+        IO_OVERLAY = models().withExistingParent("block/machine_io_overlay", "wirelessutils:io_indicator");
     }
 
     private void registerDirectionalMachines() {
@@ -128,28 +157,57 @@ public class GeneratorBlockStates extends BlockStateProvider {
                 .texture("texture", modLoc("block/" + type + "_mark"));
 
         BlockModelBuilder[] models = new BlockModelBuilder[]{active, inactive};
-        for (int i = 0; i < 2; i++) {
-            boolean isActive = i == 0;
-
-            for (Direction dir : Direction.values()) {
+        for (DirectionRotatable dir : DirectionRotatable.values()) {
+            for (int i = 0; i < 2; i++) {
+                boolean isActive = i == 0;
                 // Base textures
                 builder.part().modelFile(DIRECTIONAL_MACHINE_BASE)
-                        .rotationX(getRotationX(dir))
-                        .rotationY((int) dir.getOpposite().toYRot()) // + (dir.rotation_x ? 90 : 0))
+                        .rotationX(getRotationX(dir.direction))
+                        .rotationY((int) dir.getOpposite().direction.toYRot())
                         .addModel()
                         .condition(BlockMachineBase.FACING, dir);
 
                 // Mark
                 builder.part().modelFile(models[i])
-                        .rotationX(getRotationX(dir))
-                        .rotationY((int) dir.getOpposite().toYRot()) //+ (dir.rotation_x ? 90 : 0))
+                        .rotationX(getRotationX(dir.direction))
+                        .rotationY((int) dir.getOpposite().direction.toYRot())
                         .addModel()
                         .condition(BlockMachineBase.FACING, dir)
                         .condition(BlockMachineBase.ACTIVE, isActive);
             }
+
+            for (Rotation rot : Rotation.values()) {
+                switch(dir) {
+                    case DOWN -> {
+                        builder.part().modelFile(ROTATION_OVERLAY_DOWN)
+                                .rotationX(0)
+                                .rotationY(rot.ordinal() * -90)
+                                .addModel()
+                                .condition(BlockMachineBase.FACING, dir)
+                                .condition(BlockMachineBase.ROTATION, rot);
+                    }
+                    case UP -> {
+                        builder.part().modelFile(ROTATION_OVERLAY_UP)
+                                .rotationX(0)
+                                .rotationY(rot.ordinal() * 90)
+                                .addModel()
+                                .condition(BlockMachineBase.FACING, dir)
+                                .condition(BlockMachineBase.ROTATION, rot);
+                    }
+                    default -> {
+                        builder.part().modelFile(ROTATION_OVERLAY_HORIZONTAL)
+                                .rotationX(rot.ordinal() * 90)
+                                .rotationY((int) dir.direction.toYRot() + 90)
+                                .addModel()
+                                .condition(BlockMachineBase.FACING, dir)
+                                .condition(BlockMachineBase.ROTATION, rot);
+                    }
+                }
+            }
         }
 
         builder.part().modelFile(LEVEL_OVERLAY).addModel();
+
         builder.part().modelFile(IO_OVERLAY).addModel();
 
         models()
@@ -208,17 +266,17 @@ public class GeneratorBlockStates extends BlockStateProvider {
         for (int i = 0; i < 2; i++) {
             boolean isActive = i == 0;
 
-            for (Direction dir : Direction.values()) {
+            for (DirectionRotatable dir : DirectionRotatable.values()) {
                 // Base textures
                 builder.part().modelFile(POSITIONAL_MACHINE_BASE)
-                        .rotationY((int) dir.getOpposite().toYRot())
+                        .rotationY((int) dir.getOpposite().direction.toYRot())
                         .addModel()
                         .condition(BlockMachineBase.FACING, dir)
                         .condition(BlockMachineBase.ACTIVE, isActive);
 
                 // Mark
                 builder.part().modelFile(models[i])
-                        .rotationY((int) dir.getOpposite().toYRot())
+                        .rotationY((int) dir.getOpposite().direction.toYRot())
                         .addModel()
                         .condition(BlockMachineBase.FACING, dir)
                         .condition(BlockMachineBase.ACTIVE, isActive);

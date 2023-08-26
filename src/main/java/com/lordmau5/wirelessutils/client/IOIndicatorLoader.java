@@ -4,6 +4,8 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.lordmau5.wirelessutils.blocks.base.BlockMachineBase;
+import com.lordmau5.wirelessutils.lib.DirectionRotatable;
+import com.lordmau5.wirelessutils.lib.DirectionRotationHelper;
 import com.lordmau5.wirelessutils.lib.ModInfo;
 import com.lordmau5.wirelessutils.lib.block.SidedIO;
 import com.lordmau5.wirelessutils.lib.block.SidedIO.SidedIOState;
@@ -19,6 +21,7 @@ import net.minecraft.client.resources.model.*;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ModelEvent;
@@ -120,9 +123,11 @@ public final class IOIndicatorLoader implements IGeometryLoader<IOIndicatorLoade
                 Map<SidedIO.SidedIOFace, SidedIOState> states = extraData.get(PROPERTY);
                 if (states != null)
                 {
-                    Direction facing = state.getValue(BlockMachineBase.FACING);
+                    DirectionRotatable facing = state.getValue(BlockMachineBase.FACING);
+                    Rotation rotation = state.getValue(BlockMachineBase.ROTATION);
+                    SidedIO.SidedIOFace sideIOFace = DirectionRotationHelper.getSide(facing.direction, rotation, side);
 
-                    SidedIOState ioState = states.get(SidedIO.getIOBasedOnFacing(facing ,side));
+                    SidedIOState ioState = states.get(sideIOFace);
                     BakedModel model = ioModels.get(ioState);
                     if (ioState == SidedIOState.NONE || model == null) {
                         return List.of();

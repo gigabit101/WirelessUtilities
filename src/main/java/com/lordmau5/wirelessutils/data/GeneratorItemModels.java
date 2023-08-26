@@ -35,7 +35,7 @@ public class GeneratorItemModels extends ItemModelProvider
         registerBlockModel(ModBlocks.POSITIONAL_CONDENSER.get());
         registerBlockModel(ModBlocks.POSITIONAL_DESUBLIMATOR.get());
 
-        registerBlockWithCustomLoc(ModBlocks.ANGLED_SLIME.get(), "angled_slime_0");
+//        registerBlockWithCustomLoc(ModBlocks.ANGLED_SLIME.get(), "angled_slime_0");
     }
 
     private void registerSimpleItem(Item item)

@@ -34,7 +34,7 @@ public class ModItems
 
 
     //Blocks
-    public static final RegistryObject<Item> ANGLED_SLIME = ITEMS.register("angled_slime", () -> new BlockItem(ModBlocks.ANGLED_SLIME.get(), new Item.Properties()));
+//    public static final RegistryObject<Item> ANGLED_SLIME = ITEMS.register("angled_slime", () -> new BlockItem(ModBlocks.ANGLED_SLIME.get(), new Item.Properties()));
     public static final RegistryObject<Item> DIRECTIONAL_CHARGER = ITEMS.register("directional_charger", () -> new ItemBlockMachine(ModBlocks.DIRECTIONAL_CHARGER.get(), new Item.Properties()));
     public static final RegistryObject<Item> DIRECTIONAL_CONDENSER = ITEMS.register("directional_condenser", () -> new ItemBlockMachine(ModBlocks.DIRECTIONAL_CONDENSER.get(), new Item.Properties()));
     public static final RegistryObject<Item> DIRECTIONAL_DESUBLIMATOR = ITEMS.register("directional_desublimator", () -> new ItemBlockMachine(ModBlocks.DIRECTIONAL_DESUBLIMATOR.get(), new Item.Properties()));

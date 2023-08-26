@@ -1,6 +1,7 @@
 package com.lordmau5.wirelessutils.lib.block;
 
 import net.minecraft.core.Direction;
+import net.minecraft.world.level.block.Rotation;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -16,8 +17,7 @@ public class SidedIO {
 
         private final String name = toString().toLowerCase(Locale.ROOT);
 
-        public String getName()
-        {
+        public String getName() {
             return name;
         }
     }
@@ -32,21 +32,10 @@ public class SidedIO {
 
         private final String name = toString().toLowerCase(Locale.ROOT);
 
-        public String getName()
-        {
+        public String getName() {
             return name;
         }
     }
-
-    public static final Direction[][] OUTPUT_TABLE = {
-            // BOTTOM, TOP, FRONT, BACK, RIGHT, LEFT
-            /* Facing DOWN */ {Direction.NORTH, Direction.SOUTH, Direction.DOWN, Direction.UP, Direction.EAST, Direction.WEST},
-            /* Facing UP */ {Direction.SOUTH, Direction.NORTH, Direction.UP, Direction.DOWN, Direction.WEST, Direction.EAST},
-            /* Facing NORTH */ {Direction.DOWN, Direction.UP, Direction.NORTH, Direction.SOUTH, Direction.WEST, Direction.EAST},
-            /* Facing SOUTH */ {Direction.DOWN, Direction.UP, Direction.SOUTH, Direction.NORTH, Direction.EAST, Direction.WEST},
-            /* Facing EAST */ {Direction.DOWN, Direction.UP, Direction.EAST, Direction.WEST, Direction.NORTH, Direction.SOUTH},
-            /* Facing WEST */ {Direction.DOWN, Direction.UP, Direction.WEST, Direction.EAST, Direction.SOUTH, Direction.NORTH},
-    };
 
     private final HashMap<SidedIOFace, SidedIOState> ioStates = new HashMap<>();
 
@@ -65,11 +54,10 @@ public class SidedIO {
     public Map<SidedIOFace, SidedIOState> getStates(Predicate<SidedIOFace> sidePredicate) {
         HashMap<SidedIOFace, SidedIOState> filteredMap = new HashMap<>();
 
-        for(SidedIOFace face : SidedIOFace.values()) {
+        for (SidedIOFace face : SidedIOFace.values()) {
             if (sidePredicate.test(face)) {
                 filteredMap.put(face, getStates().get(face));
-            }
-            else {
+            } else {
                 filteredMap.put(face, SidedIOState.NONE);
             }
         }
@@ -77,21 +65,104 @@ public class SidedIO {
         return filteredMap;
     }
 
-    public static Direction getSideBasedOnFacing(Direction facing, Direction side) {
-        Direction[][] OUTPUT_TABLE = {
+    public static Direction[][] getDirectionTable() {
+        return new Direction[][]{
                 // BOTTOM, TOP, FRONT, BACK, RIGHT, LEFT
-                /* Facing DOWN */ {Direction.NORTH, Direction.SOUTH, Direction.DOWN, Direction.UP, Direction.EAST, Direction.WEST},
-                /* Facing UP */ {Direction.SOUTH, Direction.NORTH, Direction.UP, Direction.DOWN, Direction.WEST, Direction.EAST},
+                /* Facing DOWN */ {Direction.SOUTH, Direction.NORTH, Direction.DOWN, Direction.UP, Direction.EAST, Direction.WEST},
+                /* Facing UP */ {Direction.NORTH, Direction.SOUTH, Direction.UP, Direction.DOWN, Direction.EAST, Direction.WEST},
+
                 /* Facing NORTH */ {Direction.DOWN, Direction.UP, Direction.NORTH, Direction.SOUTH, Direction.WEST, Direction.EAST},
                 /* Facing SOUTH */ {Direction.DOWN, Direction.UP, Direction.SOUTH, Direction.NORTH, Direction.EAST, Direction.WEST},
+
                 /* Facing EAST */ {Direction.DOWN, Direction.UP, Direction.EAST, Direction.WEST, Direction.NORTH, Direction.SOUTH},
                 /* Facing WEST */ {Direction.DOWN, Direction.UP, Direction.WEST, Direction.EAST, Direction.SOUTH, Direction.NORTH},
         };
-
-        return OUTPUT_TABLE[facing.ordinal()][side.ordinal()];
     }
 
-    public static SidedIO.SidedIOFace getIOBasedOnFacing(Direction facing, Direction side) {
-        return SidedIO.SidedIOFace.values()[getSideBasedOnFacing(facing, side).ordinal()];
+    public static Direction[][] getRotationTable() {
+        return new Direction[][]{
+                // 0, 90, 180, 270
+                /* Facing DOWN */ {Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST},
+                /* Facing UP */ {Direction.NORTH, Direction.WEST, Direction.SOUTH, Direction.EAST},
+
+                /* Facing NORTH */ {Direction.UP, Direction.EAST, Direction.DOWN, Direction.WEST},
+                /* Facing SOUTH */ {Direction.UP, Direction.WEST, Direction.DOWN, Direction.EAST},
+
+                /* Facing EAST */ {Direction.UP, Direction.NORTH, Direction.DOWN, Direction.SOUTH},
+                /* Facing WEST */ {Direction.UP, Direction.SOUTH, Direction.DOWN, Direction.NORTH},
+        };
+    }
+
+    public static Direction getSideBasedOnFacing(Direction facing, Direction side) {
+        return getDirectionTable()[facing.ordinal()][side.ordinal()];
+    }
+
+    public static SidedIOFace getIOBasedOnFacing(Direction facing, Direction side) {
+        return SidedIOFace.values()[getSideBasedOnFacing(facing, side).ordinal()];
+    }
+
+    public static SidedIOFace getSide(Direction facing, Rotation rotation, Direction absoluteSide) {
+        // Rotation, then Direction Ordinal
+        SidedIOFace[][][] lookupTable = new SidedIOFace[][][] {
+                // ZERO Rotation
+                {
+                        // Down
+                        {
+                                SidedIOFace.FRONT,
+                                SidedIOFace.BACK,
+                                SidedIOFace.TOP,
+                                SidedIOFace.BOTTOM,
+                                SidedIOFace.RIGHT,
+                                SidedIOFace.LEFT
+                        },
+                        // Up
+                        {
+                                SidedIOFace.BACK,
+                                SidedIOFace.FRONT,
+                                SidedIOFace.TOP,
+                                SidedIOFace.BOTTOM,
+                                SidedIOFace.RIGHT,
+                                SidedIOFace.LEFT
+                        },
+                        // North
+                        {
+                                SidedIOFace.BOTTOM,
+                                SidedIOFace.TOP,
+                                SidedIOFace.FRONT,
+                                SidedIOFace.BACK,
+                                SidedIOFace.RIGHT,
+                                SidedIOFace.LEFT
+                        },
+                        // South
+                        {
+                                SidedIOFace.BOTTOM,
+                                SidedIOFace.TOP,
+                                SidedIOFace.BACK,
+                                SidedIOFace.FRONT,
+                                SidedIOFace.LEFT,
+                                SidedIOFace.RIGHT
+                        },
+                        // West
+                        {
+                                SidedIOFace.BOTTOM,
+                                SidedIOFace.TOP,
+                                SidedIOFace.LEFT,
+                                SidedIOFace.RIGHT,
+                                SidedIOFace.FRONT,
+                                SidedIOFace.BACK
+                        },
+                        // East
+                        {
+                                SidedIOFace.BOTTOM,
+                                SidedIOFace.TOP,
+                                SidedIOFace.RIGHT,
+                                SidedIOFace.LEFT,
+                                SidedIOFace.BACK,
+                                SidedIOFace.FRONT
+                        },
+                },
+        };
+
+        return lookupTable[rotation.ordinal()][facing.ordinal()][absoluteSide.ordinal()];
     }
 }

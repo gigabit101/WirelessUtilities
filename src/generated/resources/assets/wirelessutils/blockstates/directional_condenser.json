@@ -24,6 +24,66 @@
     {
       "apply": {
         "model": "wirelessutils:block/directional_machine_base",
+        "x": 90,
+        "y": 270
+      },
+      "when": {
+        "facing": "down"
+      }
+    },
+    {
+      "apply": {
+        "model": "wirelessutils:block/directional_condenser_mark",
+        "x": 90,
+        "y": 270
+      },
+      "when": {
+        "active": "false",
+        "facing": "down"
+      }
+    },
+    {
+      "apply": {
+        "model": "wirelessutils:block/rotation_down"
+      },
+      "when": {
+        "facing": "down",
+        "rotation": "none"
+      }
+    },
+    {
+      "apply": {
+        "model": "wirelessutils:block/rotation_down",
+        "y": -90
+      },
+      "when": {
+        "facing": "down",
+        "rotation": "clockwise_90"
+      }
+    },
+    {
+      "apply": {
+        "model": "wirelessutils:block/rotation_down",
+        "y": -180
+      },
+      "when": {
+        "facing": "down",
+        "rotation": "180"
+      }
+    },
+    {
+      "apply": {
+        "model": "wirelessutils:block/rotation_down",
+        "y": -270
+      },
+      "when": {
+        "facing": "down",
+        "rotation": "counterclockwise_90"
+      }
+    },
+    {
+      "apply": {
+        "model": "wirelessutils:block/directional_machine_base",
         "x": -90,
         "y": 270
       },
@@ -40,6 +100,66 @@
       "when": {
         "active": "true",
         "facing": "up"
+      }
+    },
+    {
+      "apply": {
+        "model": "wirelessutils:block/directional_machine_base",
+        "x": -90,
+        "y": 270
+      },
+      "when": {
+        "facing": "up"
+      }
+    },
+    {
+      "apply": {
+        "model": "wirelessutils:block/directional_condenser_mark",
+        "x": -90,
+        "y": 270
+      },
+      "when": {
+        "active": "false",
+        "facing": "up"
+      }
+    },
+    {
+      "apply": {
+        "model": "wirelessutils:block/rotation_up"
+      },
+      "when": {
+        "facing": "up",
+        "rotation": "none"
+      }
+    },
+    {
+      "apply": {
+        "model": "wirelessutils:block/rotation_up",
+        "y": 90
+      },
+      "when": {
+        "facing": "up",
+        "rotation": "clockwise_90"
+      }
+    },
+    {
+      "apply": {
+        "model": "wirelessutils:block/rotation_up",
+        "y": 180
+      },
+      "when": {
+        "facing": "up",
+        "rotation": "180"
+      }
+    },
+    {
+      "apply": {
+        "model": "wirelessutils:block/rotation_up",
+        "y": 270
+      },
+      "when": {
+        "facing": "up",
+        "rotation": "counterclockwise_90"
       }
     },
     {
@@ -61,105 +181,6 @@
     },
     {
       "apply": {
-        "model": "wirelessutils:block/directional_machine_base",
-        "y": 180
-      },
-      "when": {
-        "facing": "south"
-      }
-    },
-    {
-      "apply": {
-        "model": "wirelessutils:block/directional_condenser_mark_active",
-        "y": 180
-      },
-      "when": {
-        "active": "true",
-        "facing": "south"
-      }
-    },
-    {
-      "apply": {
-        "model": "wirelessutils:block/directional_machine_base",
-        "y": 270
-      },
-      "when": {
-        "facing": "west"
-      }
-    },
-    {
-      "apply": {
-        "model": "wirelessutils:block/directional_condenser_mark_active",
-        "y": 270
-      },
-      "when": {
-        "active": "true",
-        "facing": "west"
-      }
-    },
-    {
-      "apply": {
-        "model": "wirelessutils:block/directional_machine_base",
-        "y": 90
-      },
-      "when": {
-        "facing": "east"
-      }
-    },
-    {
-      "apply": {
-        "model": "wirelessutils:block/directional_condenser_mark_active",
-        "y": 90
-      },
-      "when": {
-        "active": "true",
-        "facing": "east"
-      }
-    },
-    {
-      "apply": {
-        "model": "wirelessutils:block/directional_machine_base",
-        "x": 90,
-        "y": 270
-      },
-      "when": {
-        "facing": "down"
-      }
-    },
-    {
-      "apply": {
-        "model": "wirelessutils:block/directional_condenser_mark",
-        "x": 90,
-        "y": 270
-      },
-      "when": {
-        "active": "false",
-        "facing": "down"
-      }
-    },
-    {
-      "apply": {
-        "model": "wirelessutils:block/directional_machine_base",
-        "x": -90,
-        "y": 270
-      },
-      "when": {
-        "facing": "up"
-      }
-    },
-    {
-      "apply": {
-        "model": "wirelessutils:block/directional_condenser_mark",
-        "x": -90,
-        "y": 270
-      },
-      "when": {
-        "active": "false",
-        "facing": "up"
-      }
-    },
-    {
-      "apply": {
         "model": "wirelessutils:block/directional_machine_base"
       },
       "when": {
@@ -177,6 +198,68 @@
     },
     {
       "apply": {
+        "model": "wirelessutils:block/rotation_horizontal",
+        "y": 270
+      },
+      "when": {
+        "facing": "north",
+        "rotation": "none"
+      }
+    },
+    {
+      "apply": {
+        "model": "wirelessutils:block/rotation_horizontal",
+        "x": 90,
+        "y": 270
+      },
+      "when": {
+        "facing": "north",
+        "rotation": "clockwise_90"
+      }
+    },
+    {
+      "apply": {
+        "model": "wirelessutils:block/rotation_horizontal",
+        "x": 180,
+        "y": 270
+      },
+      "when": {
+        "facing": "north",
+        "rotation": "180"
+      }
+    },
+    {
+      "apply": {
+        "model": "wirelessutils:block/rotation_horizontal",
+        "x": 270,
+        "y": 270
+      },
+      "when": {
+        "facing": "north",
+        "rotation": "counterclockwise_90"
+      }
+    },
+    {
+      "apply": {
+        "model": "wirelessutils:block/directional_machine_base",
+        "y": 180
+      },
+      "when": {
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "wirelessutils:block/directional_condenser_mark_active",
+        "y": 180
+      },
+      "when": {
+        "active": "true",
+        "facing": "south"
+      }
+    },
+    {
+      "apply": {
         "model": "wirelessutils:block/directional_machine_base",
         "y": 180
       },
@@ -192,6 +275,68 @@
       "when": {
         "active": "false",
         "facing": "south"
+      }
+    },
+    {
+      "apply": {
+        "model": "wirelessutils:block/rotation_horizontal",
+        "y": 90
+      },
+      "when": {
+        "facing": "south",
+        "rotation": "none"
+      }
+    },
+    {
+      "apply": {
+        "model": "wirelessutils:block/rotation_horizontal",
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "facing": "south",
+        "rotation": "clockwise_90"
+      }
+    },
+    {
+      "apply": {
+        "model": "wirelessutils:block/rotation_horizontal",
+        "x": 180,
+        "y": 90
+      },
+      "when": {
+        "facing": "south",
+        "rotation": "180"
+      }
+    },
+    {
+      "apply": {
+        "model": "wirelessutils:block/rotation_horizontal",
+        "x": 270,
+        "y": 90
+      },
+      "when": {
+        "facing": "south",
+        "rotation": "counterclockwise_90"
+      }
+    },
+    {
+      "apply": {
+        "model": "wirelessutils:block/directional_machine_base",
+        "y": 270
+      },
+      "when": {
+        "facing": "west"
+      }
+    },
+    {
+      "apply": {
+        "model": "wirelessutils:block/directional_condenser_mark_active",
+        "y": 270
+      },
+      "when": {
+        "active": "true",
+        "facing": "west"
       }
     },
     {
@@ -215,6 +360,68 @@
     },
     {
       "apply": {
+        "model": "wirelessutils:block/rotation_horizontal",
+        "y": 180
+      },
+      "when": {
+        "facing": "west",
+        "rotation": "none"
+      }
+    },
+    {
+      "apply": {
+        "model": "wirelessutils:block/rotation_horizontal",
+        "x": 90,
+        "y": 180
+      },
+      "when": {
+        "facing": "west",
+        "rotation": "clockwise_90"
+      }
+    },
+    {
+      "apply": {
+        "model": "wirelessutils:block/rotation_horizontal",
+        "x": 180,
+        "y": 180
+      },
+      "when": {
+        "facing": "west",
+        "rotation": "180"
+      }
+    },
+    {
+      "apply": {
+        "model": "wirelessutils:block/rotation_horizontal",
+        "x": 270,
+        "y": 180
+      },
+      "when": {
+        "facing": "west",
+        "rotation": "counterclockwise_90"
+      }
+    },
+    {
+      "apply": {
+        "model": "wirelessutils:block/directional_machine_base",
+        "y": 90
+      },
+      "when": {
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "wirelessutils:block/directional_condenser_mark_active",
+        "y": 90
+      },
+      "when": {
+        "active": "true",
+        "facing": "east"
+      }
+    },
+    {
+      "apply": {
         "model": "wirelessutils:block/directional_machine_base",
         "y": 90
       },
@@ -230,6 +437,49 @@
       "when": {
         "active": "false",
         "facing": "east"
+      }
+    },
+    {
+      "apply": {
+        "model": "wirelessutils:block/rotation_horizontal",
+        "y": 360
+      },
+      "when": {
+        "facing": "east",
+        "rotation": "none"
+      }
+    },
+    {
+      "apply": {
+        "model": "wirelessutils:block/rotation_horizontal",
+        "x": 90,
+        "y": 360
+      },
+      "when": {
+        "facing": "east",
+        "rotation": "clockwise_90"
+      }
+    },
+    {
+      "apply": {
+        "model": "wirelessutils:block/rotation_horizontal",
+        "x": 180,
+        "y": 360
+      },
+      "when": {
+        "facing": "east",
+        "rotation": "180"
+      }
+    },
+    {
+      "apply": {
+        "model": "wirelessutils:block/rotation_horizontal",
+        "x": 270,
+        "y": 360
+      },
+      "when": {
+        "facing": "east",
+        "rotation": "counterclockwise_90"
       }
     },
     {

@@ -2,6 +2,8 @@ package com.lordmau5.wirelessutils.blockentity;
 
 import com.lordmau5.wirelessutils.lib.block.SidedIO;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -13,5 +15,10 @@ public class BlockEntityPositionalMachineBase extends BlockEntityMachineBase {
     @Override
     public boolean isSideValid(SidedIO.SidedIOFace face) {
         return face != SidedIO.SidedIOFace.FRONT && face != SidedIO.SidedIOFace.TOP  && super.isSideValid(face);
+    }
+
+    @Override
+    public boolean canRotateAroundAxis(Direction.Axis axis) {
+        return axis == Direction.Axis.Y;
     }
 }
